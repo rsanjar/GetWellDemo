@@ -1,0 +1,98 @@
+﻿@model LoginRequest
+
+@{
+	ViewData["Title"] = "GetWell - Авторизация";
+	ViewData["BodyCssClass"] = "authentication sidebar-collapse";
+}
+
+@section MainStyles
+{
+	<link rel="stylesheet" href="~/css/login-site.css" />
+	<link rel="stylesheet" href="~/admin/assets/scss/main.css" />
+	<link rel="stylesheet" href="~/admin/assets/scss/pages/authentication.css" />
+}
+
+@section Scripts
+{
+	<script>
+		onError = () => {
+			$('form .alert').toggleClass('d-none');
+		};
+
+		onSuccess = (response) => {
+			window.location.href = response.redirectToUrl;
+		};		
+	</script>
+}
+
+
+<div class="page-header">
+	<div class="page-header-image" style="background-image:url(/assets/images/login.jpg)"></div>
+	<div class="container">
+		<div class="col-md-12 content-center">
+			<div class="card-plain">
+				<form asp-controller="Account" asp-action="Login" data-ajax="true" 
+				      data-ajax-method="post" data-ajax-failure="onError" data-ajax-success="onSuccess">
+					<div class="header">
+						<div class="logo-container">
+							<img src="~/assets/images/logo.png" alt="">
+						</div>
+						<h5>Авторизация</h5>
+					</div>
+					<div class="content">
+						<div class="input-group">
+							<select asp-for="Role" class="form-control">
+								<option>Тип Аккаунта</option>
+								<option value="doctor">Доктор</option>
+								<option value="clinic">Клиника</option>
+								<option value="admin">Админ</option>
+							</select>
+						</div>
+						<div class="input-group input-lg my-3">
+							<input asp-for="UserName" type="text" class="form-control phone-number" placeholder="Номер Телефона (пр. +998 (97)1204520)" />
+							<span class="input-group-addon">
+								<i class="zmdi zmdi-account-circle"></i>
+							</span>
+						</div>
+						<div class="input-group input-lg">
+							<input asp-for="Password" type="password" class="form-control" placeholder="Пароль" />
+							<span class="input-group-addon">
+								<i class="zmdi zmdi-lock"></i>
+							</span>
+						</div>
+						<div class="alert bg-danger d-none">
+							<div class="alert-error">
+								Неправильный логин/пароль
+							</div>
+						</div>
+					</div>
+					<div class="footer text-center">
+						<button type="submit" class="btn btn-primary btn-round btn-lg btn-block">Войти</button>
+						<h5><a asp-action="ForgotPassword" asp-controller="Account" class="link">Забыли Пароль?</a></h5>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<footer class="footer">
+		<div class="container">
+			<div class="copyright text-center">
+				&copy; @DateTime.Now.Year All rights reserved. GetWell.
+			</div>
+		</div>
+	</footer>
+</div>
+
+@section MainScripts
+{
+    <script src="~/js/login-site.js"></script>
+}
+
+@section PageLoader
+{}
+
+@section Header
+{}
+
+@section LeftSideBar
+{}

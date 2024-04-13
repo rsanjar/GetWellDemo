@@ -1,0 +1,43 @@
+﻿@model ServiceClinicModel
+
+@{
+    Layout = null;
+}
+
+@for (var i = 0; i < Model.GetCurrentList.Count; i++)
+{
+    int index = i;
+    var val = Model.GetCurrentList[index];
+
+    <tr>
+        <td>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <div class="check-box m-t-15 m-b-10">
+                        <input type="checkbox" asp-for="ServiceClinics[Model.CategoryID][index].Active" />
+                        <label class="checkbox-label" asp-for="ServiceClinics[Model.CategoryID][index].Active">
+                            @Model.ServiceClinics[Model.CategoryID][index].Service.Name
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                    <div class="form-group m-t-15 m-b-10">
+                        <label asp-for="ServiceClinics[Model.CategoryID][index].PriceString"></label>
+                        <input type="money" asp-for="ServiceClinics[Model.CategoryID][index].PriceString" value="@val.PriceString" class="form-control money" />
+                        <input type="hidden" asp-for="ServiceClinics[Model.CategoryID][index].ServiceID" value="@val.ServiceID" />
+                        <input type="hidden" asp-for="ServiceClinics[Model.CategoryID][index].ClinicID" value="@val.ClinicID" />
+                        <input type="hidden" asp-for="ServiceClinics[Model.CategoryID][index].ID" value="@val.ID" />
+                        <input type="hidden" asp-for="ServiceClinics[Model.CategoryID][index].SortOrder" value="@val.SortOrder" />
+                        <input type="hidden" asp-for="ServiceClinics[Model.CategoryID][index].DateCreated" value="@val.DateCreated" />
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12 col-md-6 col-lg-3">
+                    <div class="form-group m-t-15 m-b-10">
+                        <label asp-for="ServiceClinics[Model.CategoryID][index].Duration"></label>
+                        <input type="number" asp-for="ServiceClinics[Model.CategoryID][index].Duration" value="@val.Duration" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+}

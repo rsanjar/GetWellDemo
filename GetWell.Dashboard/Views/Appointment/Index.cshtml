@@ -1,0 +1,23 @@
+﻿@model AppointmentSearch
+
+@{
+    ViewData["Title"] = "Записи";
+}
+
+@await Html.PartialAsync("PageHeader")
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <vc:appointment-search search="Model"></vc:appointment-search>
+            <div class="card table-responsive" id="searchResult">
+                <vc:appointment-search-result search="Model"></vc:appointment-search-result>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("PageScripts/ClinicAutocomplete"); }
+}

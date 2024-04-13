@@ -1,0 +1,88 @@
+﻿@model ClinicGallery
+
+@{
+    Layout = null;
+}
+
+<div class="modal fade" id="GalleryUploadModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form method="post" enctype="multipart/form-data" onsubmit="GalleryUpload(this);return false;" asp-controller="ClinicGallery" asp-action="UploadImage">
+                <div class="modal-header">
+                    <h4 class="title" id="GalleryUploadLabel"><b>@Model.ClinicName</b> - Добавить Новое Фото</h4>
+                    <button type="button" aria-hidden="true" class="close float-right" data-dismiss="modal">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Title"></label>
+                                <input asp-for="Title" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Image"></label>
+                                <input type="file" asp-for="Image" accept="image/*" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="SortOrder"></label>
+                                <input type="number" asp-for="SortOrder" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-group m-t-10 m-b-10">
+                                <div class="checkbox">
+                                    <input asp-for="IsMobileImage" type="checkbox" class="form-control"/>
+                                    <label asp-for="IsMobileImage"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-group m-t-10 m-b-10">
+                                <div class="checkbox">
+                                    <input asp-for="IsThumbnail" type="checkbox" class="form-control"/>
+                                    <label asp-for="IsThumbnail"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-round waves-effect" data-dismiss="modal">ЗАКРЫТЬ</button>
+                    <button type="submit" class="btn btn-success btn-round waves-effect">СОХРАНИТЬ</button>
+                    <input type="hidden" asp-for="ClinicID"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function GalleryUpload(form) {
+        var httpRequest = new XMLHttpRequest();
+
+        httpRequest.onload = function() {
+            if (this.status !== 200) {
+                swal("ОШИБКА!", "Попробуйте попозже!", "error");
+            } else {
+                swal({
+                    title: "Загружено!",
+                    text: "Фото было успешно сохранено!",
+                    type: "success",
+                    timer: 2000,
+                    showConfirmButton: true
+                }, function() {
+                    $('#GalleryUploadModal').modal('hide');
+                    refreshGallery(@Model.ClinicID);
+                });
+                
+                form.reset();
+            }
+        };
+        httpRequest.open("post", form.action);
+        httpRequest.send(new FormData(form));
+    }
+</script>

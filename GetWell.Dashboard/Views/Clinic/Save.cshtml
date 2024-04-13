@@ -1,0 +1,33 @@
+﻿
+@model Clinic
+
+@{
+    ViewData["Title"] = Model != null && Model.ID > 0 ? $"{Model.Name} - Редактировать Данные Клиники" : "Добавить Новую Клинику";
+}
+
+@await Html.PartialAsync("PageHeader")
+
+<div class="container-fluid">
+    <form enctype="multipart/form-data" data-ajax-url="@(Model.ID > 0 ? Url.Action("Edit", "Clinic") : Url.Action("Add", "Clinic"))"
+          data-ajax-begin="begin" data-ajax-loading="#fountainG"
+          data-ajax-method="post" data-ajax="true" data-ajax-mode="replace"
+          data-ajax-update="#SaveFormMessageID" data-ajax-complete="complete">
+        
+        @{ await Html.RenderPartialAsync("Cards/ClinicCard", Model); }
+
+        @{ await Html.RenderPartialAsync("Cards/ClinicPhoneCard", Model); }
+
+        @{ await Html.RenderPartialAsync("Cards/ClinicAccountCard", Model); }
+
+        @{ await Html.RenderPartialAsync("Cards/ClinicWorkDayCard", Model); }
+
+        @{ await Html.RenderPartialAsync("FormSubmitSection"); }
+
+        <input asp-for="ID" type="hidden" />
+    </form>
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("PageScripts/SaveScript", Model); }
+}

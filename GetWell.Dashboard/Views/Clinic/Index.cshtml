@@ -1,0 +1,23 @@
+﻿@model ClinicSearch
+
+@{
+    ViewData["Title"] = "Клиники";
+}
+
+@await Html.PartialAsync("PageHeader")
+
+<div class="container-fluid">
+	<div class="row clearfix">
+        <div class="col-md-12">
+            <vc:clinic-search search="Model"></vc:clinic-search>
+            <div class="card table-responsive" id="searchResult">
+                <vc:clinic-search-result search="Model"></vc:clinic-search-result>
+            </div>
+        </div>
+	</div>
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("PageScripts/ClinicAutocomplete"); }
+}

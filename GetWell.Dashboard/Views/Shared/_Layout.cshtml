@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="description" content="GetWell dashboard">
+    <title>@ViewData["Title"]</title>
+
+    <link rel="icon" href="/favicon.ico?v=1" type="image/x-icon"> <!-- Favicon-->
+    @if (!IsSectionDefined("MainStyles"))
+    {
+        <environment include="Development">
+            <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+            <link rel="stylesheet" href="~/admin/assets/scss/main.css" asp-append-version="true" />
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+        </environment>
+
+        <environment include="Production">
+            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+            <link rel="stylesheet" href="~/admin/assets/scss/main.css" asp-append-version="true" />
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        </environment>
+
+        <link rel="stylesheet" href="~/assets/plugins/dropzone/dropzone.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    }
+    else
+    {
+        @await RenderSectionAsync("MainStyles", required: false)
+    }
+
+    @await RenderSectionAsync("Styles", required: false)
+
+    @if (!IsSectionDefined("JQueryScripts"))
+    {
+        <script src="~/js/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    }
+    else
+    {
+        @await RenderSectionAsync("JQueryScripts", required: false)
+    }
+
+    @await RenderSectionAsync("HeaderEnd", required: false)
+</head>
+<body class="theme-blue @ViewData["BodyCssClass"]">
+    @if (!IsSectionDefined("PageLoader"))
+    {
+        <!-- Page Loader -->
+        <div class="page-loader-wrapper">
+            <div class="loader">
+                <div class="m-t-30"><img class="zmdi-hc-spin" src="~/assets/images/logo.png" width="48" height="48" alt="Oreo"></div>
+                <p>Подождите...</p>
+            </div>
+        </div>
+
+        <!-- Overlay For Sidebars -->
+        <div class="overlay"></div>
+    }
+    else
+    {
+        @await RenderSectionAsync("PageLoader", required: false)
+    }
+
+    <!-- Header -->
+    @if (!IsSectionDefined("Header"))
+    {
+        <header>
+            <!-- Top Bar -->
+            @{
+                await Html.RenderPartialAsync("Header");
+            }
+        </header>
+    }
+    else
+    {
+        @await RenderSectionAsync("Header", required: false)
+    }
+
+
+    <!-- Left Sidebar -->
+    @if (!IsSectionDefined("LeftSideBar"))
+    {
+        await Html.RenderPartialAsync("LeftSideBar");
+    }
+    else
+    {
+        @await RenderSectionAsync("LeftSideBar", required: false)
+    }
+
+    <!-- Right Sidebar -->
+    @*@if (!IsSectionDefined("RightSideBar"))
+    {
+    await Html.RenderPartialAsync("RightSideBar");
+    }
+    else
+    {
+    @await RenderSectionAsync("RightSideBar", required: false)
+    }*@
+
+    <!-- Chat-launcher -->
+    @*@if (!IsSectionDefined("ChatBox"))
+    {
+    await Html.RenderPartialAsync("ChatBox");
+    <div class="chat-launcher"></div>
+    }
+    else
+    {
+    @await RenderSectionAsync("ChatBox", required: false)
+    }*@
+
+    <section class="content @(ViewData["PageMainCssClass"] ?? "home")">
+        @RenderBody()
+
+        <div id="fountainG">
+            <div id="fountainG_1" class="fountainG"></div>
+            <div id="fountainG_2" class="fountainG"></div>
+            <div id="fountainG_3" class="fountainG"></div>
+            <div id="fountainG_4" class="fountainG"></div>
+            <div id="fountainG_5" class="fountainG"></div>
+            <div id="fountainG_6" class="fountainG"></div>
+            <div id="fountainG_7" class="fountainG"></div>
+            <div id="fountainG_8" class="fountainG"></div>
+        </div>
+    </section>
+
+    @await RenderSectionAsync("Modals", required: false)
+
+    @if (!IsSectionDefined("MainScripts"))
+    {
+        <environment include="Development">
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+
+        <environment include="Production">
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
+    }
+    else
+    {
+        @await RenderSectionAsync("MainScripts", required: false)
+    }
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script src="~/js/jquery-inputmask/index.min.js" asp-append-version="true"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            initAppointmentAjaxNotifications();
+            initInputMasks();
+        });
+                
+        function initInputMasks() {
+            $(".phone-number").mask("+998 (XX) XXXXXXX", { clearIfNotMatch: true });
+            $('.money').mask("# ##X", { reverse: true });
+            $('.money-decimal').mask("# ##X.XX", { reverse: true });
+        }
+
+        function initAppointmentAjaxNotifications() {
+            var role = '@(User.Role())';
+            var isClinic = role === 'Clinic';
+            var id = '@User.ID()';
+
+            if (role === 'Clinic' || role === 'Doctor') {
+                ajaxAppointmentNotificationClinic(id, isClinic);
+
+                setInterval(function () {
+                    ajaxAppointmentNotificationClinic(id, isClinic);
+                }, 5000);
+            }
+        }
+    </script>
+
+    <div id="modalDialogBox"></div>
+</body>
+</html>

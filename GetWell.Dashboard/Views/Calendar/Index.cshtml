@@ -1,0 +1,152 @@
+﻿@model CalendarSearch
+
+@{
+    ViewData["Title"] = "Календарь";
+}
+
+@await Html.PartialAsync("PageHeader")
+
+@section HeaderEnd
+    {
+    <link href="~/assets/plugins/full-calendar/main.css" rel="stylesheet" />
+    <script src="~/assets/plugins/full-calendar/main.js"></script>
+    <script src="~/assets/plugins/full-calendar/locales-all.min.js"></script>
+
+    <script>
+        var calendar = null;
+        var isAdminAccount = @(User.IsInRole(UserRoles.Admin).ToString().ToLower());
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                themeSystem: 'cosmo',
+                weekNumbers: false,
+                handleWindowResize: true,
+                allDaySlot: false,
+                height: 'auto',
+                slotLabelFormat: {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                },
+                initialView: 'timeGridWeek',
+                titleFormat: {
+                    month: '2-digit',
+                    year: '2-digit',
+                    day: 'numeric'
+                },
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                loading: function (isLoading, view) {
+                    if (isLoading) {
+                        $('.modal-backdrop.local-ajax-backdrop').addClass('loading');
+                        $('section.content > #fountainG').show();
+                    } else {
+                        $('.modal-backdrop.local-ajax-backdrop').removeClass('loading');
+                        $('section.content > #fountainG').hide();
+                    }
+                },
+                dateClick: function (info) {
+                    //alert('Clicked on: ' + info.dateStr);
+                    //alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+                    //alert('Current view: ' + info.view.type);
+                    // change the day's background color just for fun
+                    //info.dayEl.style.backgroundColor = 'red';
+                },
+                initialDate: '@DateTime.Now.ToString("yyyy-MM-dd")',
+                navLinks: true, // can click day/week names to navigate views
+                selectable: true,
+                selectMirror: true,
+                select: function (arg) {
+                    if (isAdminAccount && (arg.event === undefined || (arg.event.id || 0) <= 0))
+                        return false;
+
+                    $('section.content > #fountainG').show();
+                    
+                    showAppointmentModal(0);
+
+                    //console.log(arg.end);
+                    //var title = prompt('Заголовок События:');
+                    //if (title) {
+                    //    calendar.addEvent({
+                    //        title: title,
+                    //        start: arg.start,
+                    //        end: arg.end,
+                    //        allDay: arg.allDay
+                    //    })
+                    //}
+                    calendar.unselect();
+                },
+                locale: 'ru',
+                eventClick: function (arg) {
+                    $('section.content > #fountainG').show();
+
+                    if (isAdminAccount && (arg.event.id || 0) <= 0)
+                        return false;
+
+                    showAppointmentModal(arg.event.id || 0);
+
+                    //console.log(arg.event.id);
+                    //if (confirm('Уверены что хотите удалить событие?')) {
+                    //    console.log(arg.event.id);
+                    //    arg.event.remove();
+                    //}
+                },
+                eventAdd: function (arg) {
+                },
+                eventChange: function (arg) {
+
+                },
+                editable: true,
+                slotDuration: '00:15:00',
+                dayMaxEvents: true, // allow "more" link when too many events
+                events: {
+                    url: '/calendar/searchresult',
+                    method: 'POST',
+                    extraParams: function () { // a function that returns an object
+                        return {
+                            CityID: $('#CityID').val(),
+                            ClinicID: $('#ClinicID').val(),
+                            ClinicDoctorID: $('#ClinicDoctorID').val()
+                        };
+                    },
+                    failure: function () {
+                        alert('Ошибка при загрузке');
+                    },
+                    color: 'yellow',   // a non-ajax option
+                    textColor: 'black' // a non-ajax option
+                }
+            });
+
+            calendar.render();
+        });
+
+        function showAppointmentModal(id) {
+            $.ajax({
+                method: "GET",
+                url: "@Url.Action("Modal", "Appointment")" + "/" + id
+            }).done(function (html) {
+                $("#modalDialogBox").html("");
+                $("#modalDialogBox").html(html);
+                $("#appointmentModal").modal("show");
+                $('section.content > #fountainG').hide();
+            });
+        }
+    </script>
+}
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-12">
+            <vc:calendar-search search="Model"></vc:calendar-search>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-12">
+            <div class="modal-backdrop local-ajax-backdrop"></div>
+            <div class="card" id="calendar"></div>
+        </div>
+    </div>
+</div>

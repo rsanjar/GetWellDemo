@@ -1,0 +1,22 @@
+﻿
+<nav class="navbar p-l-5 p-r-5">
+	<ul class="nav navbar-nav navbar-left">
+        <li>
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="bars"></a>
+                @*<a class="navbar-brand" href="index.html"><img src="/assets/images/logo.svg" width="30" alt="Oreo"><span class="m-l-10">Oreo</span></a>*@
+            </div>
+        </li>
+        <li class="float-right">            
+            @if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                <a asp-action="SignOut" asp-controller="Account" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i> Выйти</a>
+            }
+            else
+            {
+                <a asp-action="Login" asp-controller="Account" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i> Войти</a>
+            }
+            
+        </li>
+	</ul>
+</nav>

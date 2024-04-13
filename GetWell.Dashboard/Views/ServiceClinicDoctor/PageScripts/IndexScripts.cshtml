@@ -1,0 +1,20 @@
+﻿@{
+    Layout = null;
+
+}
+
+<script type="text/javascript" defer>
+    failure = function() {
+        swal("ОШИБКА!", "Попробуйте попозже!", "error");
+    }
+
+    success = function() {
+        swal({
+            title: "Успешно Сохранено!",
+            text: "",
+            type: "success",
+            timer: 2000,
+            showConfirmButton: false
+        });
+    }
+</script>

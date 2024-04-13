@@ -1,0 +1,89 @@
+﻿@using System.Globalization
+
+@model Doctor
+
+<div class="row clearfix">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    <strong>График</strong> Работы
+                    <small>График работы врача...</small>
+                </h2>
+            </div>
+            <div class="body">
+                
+                    @{
+                        for (int i = 1; i <= 7; i++)
+                        {
+                            int index = i - 1;
+                            
+                            <div class="row">
+                                <div class="col-2 col-md-1">
+                                    <div class="row">
+                                        <div class="col-12 p-r-5">
+                                            <div class="form-group text-center">
+                                                <span>
+                                                    @if (DateTimeFormatInfo.CurrentInfo != null)
+                                                    {
+                                                        @DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName((DayOfWeek) (i % 7))
+                                                    }
+                                                    else
+                                                    {
+                                                        @((DayOfWeek)(i % 7))
+                                                    }
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-10 col-md-11">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-12 col-md-6 col-lg-8">
+                                                    <div class="row">
+                                                        <div class="col-6 p-r-5 p-l-5">
+                                                            <div class="form-group">
+                                                                <label asp-for="WorkDay[index].OpenTimeNullable"></label>
+                                                                <input asp-for="WorkDay[index].OpenTimeNullable" value="@Model.WorkDay[index].OpenTimeString" type="time" class="timepicker form-control" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 p-l-0">
+                                                            <div class="form-group">
+                                                                <label asp-for="WorkDay[index].CloseTimeNullable"></label>
+                                                                <input asp-for="WorkDay[index].CloseTimeNullable" value="@Model.WorkDay[index].CloseTimeString" type="time" class="timepicker form-control" />
+                                                                <input asp-for="WorkDay[index].WeekDayID" type="hidden" />
+                                                                <input asp-for="WorkDay[index].ID" type="hidden" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6 col-lg-4">
+                                                    <div class="row">
+                                                        <div class="col-6 p-r-5 p-l-5">
+                                                            <div class="form-group">
+                                                                <label asp-for="WorkDay[index].BreakStartTime"></label>
+                                                                <input asp-for="WorkDay[index].BreakStartTime" value="@Model.WorkDay[index].BreakStartTimeString" type="time" class="timepicker form-control" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 p-l-0">
+                                                            <div class="form-group">
+                                                                <label asp-for="WorkDay[index].BreakEndTime"></label>
+                                                                <input asp-for="WorkDay[index].BreakEndTime" value="@Model.WorkDay[index].BreakEndTimeString" type="time" class="timepicker form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+            </div>
+        </div>
+    </div>
+</div>

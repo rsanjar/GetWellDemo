@@ -1,0 +1,92 @@
+﻿@model DoctorSearch
+
+<div class="card">
+    <div class="header">
+        <h2><strong>Поиск</strong> Докторов</h2>
+    </div>
+    <div class="body">
+        <form data-ajax-url="@Url.Action("SearchResult", "Doctor")"
+              data-ajax-begin="begin" data-ajax-loading="#fountainG"
+              data-ajax-method="post" data-ajax="true" data-ajax-mode="replace"
+              data-ajax-update="#searchResult" data-ajax-complete="complete">
+
+            <div class="row clearfix">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input asp-for="FirstName" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input asp-for="LastName" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input asp-for="MiddleName" type="text" class="form-control" />
+                    </div>
+                </div>
+                @if (User.IsInRole(UserRoles.Admin))
+                {
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <select asp-for="ClinicID" asp-items="Model.Clinics" class="form-control custom-select"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <select asp-for="CityID" asp-items="Model.Cities" class="form-control custom-select"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <select asp-for="RegionID" disabled="disabled" class="form-control custom-select">
+                                <option>Регион</option>
+                            </select>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <input type="hidden" asp-for="ClinicID" />
+                }
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">
+                            <i class="zmdi zmdi-calendar"></i>
+                        </span>
+                        <input asp-for="DateOfBirthFrom" type="text" class="datetimepicker form-control"/>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">
+                            <i class="zmdi zmdi-calendar"></i>
+                        </span>
+                        <input asp-for="DateOfBirthTo" type="text" class="datetimepicker form-control"/>
+                    </div>
+                </div>
+            </div>
+
+            @{ await Html.RenderPartialAsync("SearchFormSubmitSection", Model); }
+        </form>        
+    </div>
+</div>
+
+<script type="text/javascript" defer>
+    $(function() {
+        //Datetimepicker plugin
+        $('.datetimepicker').bootstrapMaterialDatePicker({
+            format: 'DD-MMM-YYYY',
+            clearButton: true,
+            weekStart: 1,
+            date: true,
+            time: false
+            //maxDate: Date.now
+        });
+
+        $('form #CityID').on('change', function() {
+            ajaxLoadSelect('/api/region/getall/', this.value, 'form #RegionID', 'Регион');
+        });
+    });
+</script>

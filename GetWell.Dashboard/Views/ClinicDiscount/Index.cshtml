@@ -1,0 +1,18 @@
+﻿@model ClinicDiscountSearch
+
+@{
+    ViewData["Title"] = "Акции";
+}
+
+@await Html.PartialAsync("PageHeader")
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <vc:clinic-discount-search search="Model"></vc:clinic-discount-search>
+            <div class="card table-responsive" id="searchResult">
+                <vc:clinic-discount-search-result search="Model"></vc:clinic-discount-search-result>
+            </div>
+        </div>
+    </div>
+</div>

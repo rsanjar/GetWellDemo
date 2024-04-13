@@ -1,0 +1,66 @@
+﻿@model Patient
+
+<div class="row clearfix">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    <strong>Профиль</strong> Пациента
+                    <small>Дополнительная информация пациента...</small>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="PatientProfile.DateOfBirth"></label>
+                            <input asp-for="PatientProfile.DateOfBirth" value="@Model.PatientProfile.DateOfBirth.ToLocalDate("01-01-1980")" type="text" class="datetimepicker form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="PatientProfile.Address"></label>
+                            <input asp-for="PatientProfile.Address" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="PatientProfile.Street"></label>
+                            <input asp-for="PatientProfile.Street" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="PatientProfile.District"></label>
+                            <input asp-for="PatientProfile.District" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="PatientProfile.CityID"></label>
+                            <select asp-for="PatientProfile.CityID" asp-items="Model.PatientProfile.Cities" class="form-control custom-select"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="PatientProfile.RegionID"></label>
+                            <select asp-for="PatientProfile.RegionID" disabled="disabled" class="form-control custom-select">
+                                <option>Регион</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group m-t-5 m-b-15">
+                            <div class="checkbox">
+                                <input asp-for="PatientProfile.IsMale" type="checkbox" class="form-control" />
+                                <label asp-for="PatientProfile.IsMale"></label>
+                                <input asp-for="PatientProfile.ID" type="hidden" />
+                                <input asp-for="PatientProfile.PatientID" type="hidden" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

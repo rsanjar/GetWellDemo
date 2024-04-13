@@ -1,0 +1,94 @@
+﻿@model CalendarSearch
+
+<div class="card">
+    <div class="header">
+        <h2><strong>Календарь</strong> Врачей</h2>
+    </div>
+    <div class="body">
+        <form id="calendarForm">
+            <div class="row clearfix">
+                <div class="col-12">
+                    <div class="row">
+                        @if (User.IsInRole(UserRoles.Admin))
+                        {
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="CityID"></label>
+                                    <select asp-for="CityID" asp-items="Model.Cities" class="form-control custom-select"></select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="ClinicID"></label>
+                                    <select asp-for="ClinicID" disabled="disabled" class="form-control custom-select">
+                                        <option value="0">Клиника</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <input asp-for="CityID" type="hidden" />
+                            <input asp-for="ClinicID" type="hidden" />
+                        }
+                        
+                        @if (User.IsInAnyRole(UserRoles.AdminOrClinic))
+                        {
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="ClinicDoctorID"></label>
+                                    <select asp-for="ClinicDoctorID" disabled="disabled" class="form-control custom-select">
+                                        <option value="0">Врач</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <input asp-for="ClinicDoctorID" type="hidden" value="@User.ID()" />                            
+                        }
+                        
+                        <input asp-for="Start" type="hidden" />
+                        <input asp-for="End" type="hidden" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var clinicID = @Model.ClinicID.GetValueOrDefault(0);
+
+        ajaxLoadCalendarClinicDoctorSelect(clinicID);
+        
+        $('#calendarForm select').on('change', function() {
+            $('#calendarForm').submit();
+        });
+
+        $('form #CityID').on('change', function () {
+            ajaxLoadSelect('/api/Clinic/get-all-key-value/', this.value, 'form #ClinicID', 'Клиника');
+            
+            $('#ClinicID').val(0);
+            $('#ClinicDoctorID').val(0);
+        });
+        
+        $('form #ClinicID').on('change', function () {
+            ajaxLoadCalendarClinicDoctorSelect(this.value);
+        });
+        
+        $('#calendarForm').on('submit', function(e){
+            e.preventDefault();
+            calendar.removeAllEvents();
+            calendar.refetchEvents();
+
+            return false;
+        });
+    });
+    
+    function ajaxLoadCalendarClinicDoctorSelect(id){
+        if(id > 0)
+            ajaxLoadSelect('/api/ClinicDoctor/get-all-by-clinic-key-value/', id, 'form #ClinicDoctorID', 'Врач');
+    }
+</script>

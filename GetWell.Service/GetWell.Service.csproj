@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="system.diagnostics.Debug" Version="4.3.0" />
+    <PackageReference Include="system.IO" Version="4.3.0" />
+    <PackageReference Include="system.Io.FileSystem" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GetWell.Core\GetWell.Core.csproj" />
+    <ProjectReference Include="..\GetWell.Data\GetWell.Data.csproj" />
+  </ItemGroup>
+
+</Project>

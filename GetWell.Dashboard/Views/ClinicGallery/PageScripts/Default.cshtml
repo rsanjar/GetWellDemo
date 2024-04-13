@@ -1,0 +1,76 @@
+﻿
+<script>
+        $(function() {
+            loadGallery(false);
+
+            $('.btn.btn-white.btn-icon.btn-round').on('click', function() {
+                $('#GalleryUploadModal').modal('show');
+            });
+        });
+
+        function loadGallery(destroy) {
+            var gallery = $('#animated-thumbnails');
+
+            if (destroy || false) {
+                $("#animated-thumbnails").data('lightGallery').destroy(true);
+            }
+
+            gallery.lightGallery({
+                thumbnail: true,
+                selector: 'div.image'
+            });
+        }
+
+        function refreshGallery(id) {
+            $.ajax({
+                    url: '@Url.Action("Gallery", "ClinicGallery")' + '?clinicID=' + id
+                })
+                .done(function(html) {
+                    $("#searchResult").html(html);
+                    loadGallery();
+                });
+        }
+
+        function Delete(id) {
+            var httpRequest = new XMLHttpRequest();
+
+            httpRequest.onload = function() {
+                if (this.status !== 200) {
+                    swal("ОШИБКА!", "Попробуйте попозже!", "error");
+                } else {
+                    document.getElementById("gallery_" + id).outerHTML = "";
+                    swal({
+                        title: "Удалено!",
+                        text: "Картинка была успешно удалена!",
+                        type: "success",
+                        timer: 2000,
+                        showConfirmButton: true
+                    });
+
+                    loadGallery(true);
+                }
+
+                return status;
+            };
+
+            httpRequest.open("post", '@Url.Action("Delete", "ClinicGallery")' + '?id=' + id);
+            httpRequest.send();
+        }
+
+        function showConfirmMessage(id) {
+            swal({
+                    title: "Вы Уверены?",
+                    text: "Вы точно хотите удалить это фото?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Да, Удалить!",
+                    closeOnConfirm: false
+                },
+                function() {
+                    Delete(id);
+                });
+
+            return false;
+        }
+</script>

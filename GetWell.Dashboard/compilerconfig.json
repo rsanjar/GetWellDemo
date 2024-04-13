@@ -1,0 +1,30 @@
+﻿[
+  {
+    "outputFile": "wwwroot/scss/bootstrap.css",
+    "inputFile": "wwwroot/scss/bootstrap.scss"
+  },
+  {
+    "outputFile": "wwwroot/admin/assets/scss/main.css",
+    "inputFile": "wwwroot/admin/assets/scss/main.scss"
+  },
+  {
+    "outputFile": "wwwroot/admin/assets/scss/color_skins.css",
+    "inputFile": "wwwroot/admin/assets/scss/color_skins.scss"
+  },
+  {
+    "outputFile": "wwwroot/admin/assets/scss/pages/authentication.css",
+    "inputFile": "wwwroot/admin/assets/scss/pages/authentication.scss"
+  },
+  {
+    "outputFile": "wwwroot/admin/assets/js/pages/index.min.js",
+    "inputFile": "wwwroot/admin/assets/js/pages/index.js"
+  },
+  {
+    "outputFile": "wwwroot/assets/plugins/light-gallery/js/lightgallery-all.min.js",
+    "inputFile": "wwwroot/assets/plugins/light-gallery/js/lightgallery-all.js"
+  },
+  {
+    "outputFile": "wwwroot/js/jquery-inputmask/index.min.js",
+    "inputFile": "wwwroot/js/jquery-inputmask/index.js"
+  }
+]

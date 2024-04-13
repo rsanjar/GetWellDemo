@@ -1,0 +1,68 @@
+﻿@model Patient
+
+<div class="row clearfix">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    <strong>Базовая</strong> Информация
+                    <small>Основные данные пациента...</small>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="FirstName"></label>
+                            <input asp-for="FirstName" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="LastName"></label>
+                            <input asp-for="LastName" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="MiddleName"></label>
+                            <input asp-for="MiddleName" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Phone"></label>
+                            <input asp-for="Phone" type="tel" class="form-control phone-number" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="SecondaryPhone"></label>
+                            <input asp-for="SecondaryPhone" type="tel" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" type="email" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="PreferredLanguage"></label>
+                            <select asp-for="PreferredLanguage" asp-items="Model.Languages" class="form-control custom-select"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group m-t-5 m-b-15">
+                            <div class="checkbox">
+                                <input asp-for="IsActive" type="checkbox" class="form-control" />
+                                <label asp-for="IsActive"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

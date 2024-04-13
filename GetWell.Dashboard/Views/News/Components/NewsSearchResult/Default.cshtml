@@ -1,0 +1,32 @@
+﻿@model PaginatedList<News>
+
+<table class="table table-bordered table-striped table-hover dataTable">
+    <thead>
+    <tr>
+        <th class="sorting" sort-id="@nameof(News.Title)">Заголовок</th>
+        <th class="sorting" sort-id="@nameof(News.IsDisabled)">В Архиве</th>
+        <th class="sorting" sort-id="@nameof(News.NewsLanguage)">Язык</th>
+        <th class="sorting" sort-id="@nameof(News.DateCreated)">Дата Создания</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td><span class="list-name">@i.Title</span></td>
+            <td>@(i.IsDisabled ? "Да" : "Нет")</td>
+            <td>@i.Language</td>
+            <td>@i.DateCreated.ToString("dd-MMM-yyyy HH:mm")</td>
+            <td class="text-center">
+                <a asp-action="Edit" asp-controller="News" asp-route-id="@i.ID" title="Редактировать"><i class="material-icons">edit</i></a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation">
+    @await Html.PartialAsync("Pagination", Model)
+</nav>
+

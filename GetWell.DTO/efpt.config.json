@@ -1,0 +1,185 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "GetwellContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": null,
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "GetWell.DTO",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 2,
+   "Tables": [
+      {
+         "Name": "[dbo].[AdminAccount]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Appointment]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AppointmentProfile]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Category]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[City]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Clinic]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClinicAccount]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClinicDiscount]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClinicDoctorAccount]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClinicDoctorEvent]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClinicDoctors]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClinicDoctorWorkDay]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClinicGallery]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClinicPhones]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClinicReview]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClinicRole]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClinicWorkDay]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Country]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Doctor]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DoctorPhones]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DoctorProfile]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DoctorSpecialty]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[News]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Patient]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PatientAccount]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PatientFavoriteClinics]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PatientFavoriteDoctors]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PatientProfile]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Region]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Service]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ServiceCategory]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ServiceClinic]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ServiceClinicDoctors]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Specialty]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Title]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WeekDay]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ZipCode]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "EC2AMAZ-K1LM8BV.GetWell",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": true,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoConstructor": true,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": true,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

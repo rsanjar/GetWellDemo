@@ -1,0 +1,36 @@
+﻿@model PaginatedList<ServiceCategory>
+
+<table class="table table-bordered table-striped table-hover dataTable">
+    <thead>
+    <tr>
+        <th>Цвет</th>
+        <th>Иконка</th>
+        <th class="sorting" sort-id="@nameof(ServiceCategory.Name)">Название</th>
+        <th class="sorting" sort-id="@nameof(ServiceCategory.CategoryName)">Тип Клиники</th>
+        <th class="sorting" sort-id="@nameof(ServiceCategory.TitleName)">Тип Врача</th>
+        <th class="sorting" sort-id="@nameof(ServiceCategory.IsActive)">Активный</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td class="padding-0 text-center align-middle"><span class="img-icon" style="background-color: @(i.HexColor);">&nbsp;</span></td>
+            <td class="padding-0 text-center align-middle"><img src="@i.IconUrl" class="img-icon" alt=""/></td>
+            <td><span class="list-name">@i.Name</span></td>
+            <td>@i.CategoryName</td>
+            <td>@i.TitleName</td>
+            <td>@(i.Active ? "Да" : "Нет")</td>
+            <td class="text-center">
+                <a asp-action="Edit" asp-controller="ServiceCategory" asp-route-id="@i.ID" title="Редактировать"><i class="material-icons">edit</i></a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation">
+    @await Html.PartialAsync("Pagination", Model)
+</nav>
+

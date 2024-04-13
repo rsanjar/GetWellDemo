@@ -1,0 +1,37 @@
+﻿@model ServiceClinicModel
+
+@{
+    ViewData["Title"] = "Услуги Клиники";
+}
+
+@await Html.PartialAsync("PageHeader")
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            @foreach (var category in Model.ServiceCategories)
+            {
+                Model.CategoryID = category.Key;
+                Model.CategoryName = category.Value;
+
+                await Html.RenderPartialAsync("Cards/Save", Model);
+            }
+
+            <script>
+                failure = function() {
+                    swal("ОШИБКА!", "Попробуйте попозже!", "error");
+                }
+
+                success = function() {
+                    swal({
+                        title: "Успешно Сохранено!",
+                        text: "",
+                        type: "success",
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                }
+            </script>
+        </div>
+    </div>
+</div>

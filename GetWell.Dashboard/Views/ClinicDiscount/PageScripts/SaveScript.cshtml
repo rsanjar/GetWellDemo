@@ -1,0 +1,59 @@
+﻿@model ClinicDiscount
+
+<script type="text/javascript" defer>
+    $(document).ready(function() {
+        //Datetimepicker plugin
+        $('.datetimepicker').bootstrapMaterialDatePicker({
+            clearButton: true,
+            weekStart: 1,
+            language: 'ru',
+            format: 'DD-MM-YYYY',
+            date: true,
+            time: false
+            //maxDate: Date.now
+        });
+
+        loadCities(@Model.ClinicCityID);
+        loadRegions(@Model.ClinicCityID, @Model.ClinicCityRegionID);
+        loadClinics(@Model.ClinicCityRegionID, @Model.ClinicID);
+        loadServiceClinics(@Model.ClinicID, @Model.ServiceClinicID);
+
+        $('#ClinicCityID').on('change',
+            function() {
+                loadRegions(this.value);
+            });
+
+        $('#ClinicCityRegionID').on('change',
+            function() {
+                loadClinics(this.value);
+            });
+
+        $('#ClinicID').on('change',
+            function () {
+                loadServiceClinics(this.value);
+            });
+
+    });
+
+    function loadCities(selectedId) {
+        ajaxLoadSelect('/api/city/getall/1', '', '#ClinicCityID', 'Регион', selectedId, function() {
+            loadRegions(@Model.ClinicCityID, @Model.ClinicCityRegionID);
+        });
+    }
+    
+    function loadRegions(cityId, selectedId) {
+        ajaxLoadSelect('/api/region/getall/', cityId, '#ClinicCityRegionID', 'Регион', selectedId, function () {
+            loadClinics(@Model.ClinicCityRegionID, @Model.ClinicID);
+        });
+    }
+
+    function loadClinics(regionId, selectedId) {
+        ajaxLoadSelect('/api/clinic/get-by-region/', regionId, '#ClinicID', 'Клиника', selectedId, function () {
+            loadServiceClinics(@Model.ClinicID, @Model.ServiceClinicID);
+        });
+    }
+
+    function loadServiceClinics(clinicId, selectedId) {
+        ajaxLoadSelect('/api/ServiceClinic/getAll/', clinicId, '#ServiceClinicID', 'Услуга', selectedId);
+    }
+</script>

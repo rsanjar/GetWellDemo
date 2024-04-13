@@ -1,0 +1,41 @@
+﻿@model PaginatedList<ClinicDiscount>
+
+<table class="table table-bordered table-striped table-hover dataTable">
+    <thead>
+        <tr>
+            <th class="sorting" sort-id="@nameof(ClinicDiscount.ClinicName)">Клиника</th>
+            <th class="sorting" sort-id="@nameof(ClinicDiscount.Title)">Заголовок</th>
+            <th class="sorting" sort-id="@nameof(ClinicDiscount.DateCreated)">Дата Создания</th>
+            <th class="sorting" sort-id="@nameof(ClinicDiscount.PriceBeforeDiscount)">Цена</th>
+            <th class="sorting" sort-id="@nameof(ClinicDiscount.DiscountPercentage)">Скидка(%)</th>
+            <th class="sorting" sort-id="@nameof(ClinicDiscount.IsActive)">Действующий</th>
+            <th class="sorting" sort-id="@nameof(ClinicDiscount.StartDate)">Дата Начала</th>
+            <th class="sorting" sort-id="@nameof(ClinicDiscount.EndDate)">Дата Конца</th>
+            <th>Изменить</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+        <tr>
+            <td>@i.ClinicName</td>
+            <td>"@i.Title"</td>
+            <td>@i.DateCreated.ToString("dd-MMM-yyyy HH:mm")</td>
+            <td>@i.PriceBeforeDiscount.ToString("C0")</td>
+            <td>@(i.DiscountPercentage)%</td>
+            <td>@(i.IsActive ? "Да" : "Нет")</td>
+            <td>@i.StartDate?.ToString("dd-MMM-yyyy HH:mm")</td>
+            <td>@i.EndDate?.ToString("dd-MMM-yyyy HH:mm")</td>
+            <td class="text-center">
+                    <a asp-action="Edit" asp-controller="ClinicDiscount" asp-route-id="@i.ID" title="Редактировать">
+                    <i class="material-icons">edit</i>
+                </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation">
+    @await Html.PartialAsync("Pagination", Model)
+</nav>

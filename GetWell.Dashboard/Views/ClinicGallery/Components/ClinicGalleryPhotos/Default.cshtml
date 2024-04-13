@@ -1,0 +1,27 @@
+﻿@model Clinic
+
+<div id="animated-thumbnails" class="list-unstyled row clearfix">
+    @foreach (var c in Model.Gallery)
+    {
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 m-b-20" id="gallery_@c.ID">
+            <div class="card">
+                <div class="file">
+                    <a href="javascript:void(0);">
+                        <div class="hover">
+                            <button type="button" class="btn btn-icon btn-icon-mini btn-round btn-danger" onclick="return showConfirmMessage(@c.ID);">
+                                <i class="zmdi zmdi-delete"></i>
+                            </button>
+                        </div>
+                        <div class="image" href="@c.ImageUrl">
+                            <img src="@c.ImageUrl" class="img-fluid" alt=""/>
+                        </div>
+                        <div class="file-name">
+                            <p class="m-b-5 text-muted">@c.Title</p>
+                            <small>@c.SortOrder <span class="date text-muted">@c.DateCreated.ToString("d")</span></small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

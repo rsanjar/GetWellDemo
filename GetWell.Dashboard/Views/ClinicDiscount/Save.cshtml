@@ -1,0 +1,41 @@
+﻿@model ClinicDiscount
+
+@{
+    ViewData["Title"] = Model != null && Model.ID > 0 ? $"{Model.Title} - Редактировать Акцию" : "Добавить Новую Акцию";
+}
+
+@await Html.PartialAsync("PageHeader")
+
+<div class="container-fluid">
+    <form enctype="multipart/form-data" data-ajax-url="@(Model.ID > 0 ? Url.Action("Edit", "ClinicDiscount") : Url.Action("Add", "ClinicDiscount"))"
+          data-ajax-begin="begin" data-ajax-loading="#fountainG"
+          data-ajax-method="post" data-ajax="true" data-ajax-mode="replace"
+          data-ajax-update="#SaveFormMessageID" data-ajax-complete="complete">
+
+        @{ await Html.RenderPartialAsync("Cards/ClinicCard", Model); }
+
+        @{ await Html.RenderPartialAsync("Cards/ClinicDiscountCard", Model); }
+
+        @{ await Html.RenderPartialAsync("FormSubmitSection"); }
+
+        <input asp-for="ID" type="hidden"/>
+    </form>
+</div>
+
+@section Scripts
+{
+    @await Html.PartialAsync("PageScripts/SaveScript", Model)
+
+    <script src="~/assets/plugins/ckeditor/ckeditor.js"></script> <!-- Ckeditor -->
+    
+    <script>
+        $(function () {
+            //CKEditor
+            CKEDITOR.replace('ckeditor');
+            CKEDITOR.replace('ckeditor1');
+            CKEDITOR.replace('ckeditor2');
+            CKEDITOR.config.height = 300;
+  
+        });
+    </script>
+}

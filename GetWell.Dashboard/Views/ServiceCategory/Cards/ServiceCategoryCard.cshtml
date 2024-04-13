@@ -1,0 +1,95 @@
+﻿@model ServiceCategory
+
+<div class="row clearfix">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    <strong>Базовая</strong> Информация
+                    <small>Тип Услуг...</small>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" type="text" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="NameUz"></label>
+                            <input asp-for="NameUz" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="NameEn"></label>
+                            <input asp-for="NameEn" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group m-t-30">
+                            <label asp-for="Description"></label>
+                            <textarea asp-for="Description" rows="3" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group m-t-30">
+                            <label asp-for="DescriptionUz"></label>
+                            <textarea asp-for="DescriptionUz" rows="3" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group m-t-30">
+                            <label asp-for="DescriptionEn"></label>
+                            <textarea asp-for="DescriptionEn" rows="3" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group m-t-5 m-b-10">
+                            <div class="checkbox">
+                                <input asp-for="Active" type="checkbox" class="form-control" />
+                                <label asp-for="Active"></label>
+                            </div>
+                        </div>
+                    </div>
+                    @if (Model != null && !string.IsNullOrWhiteSpace(Model.IconUrl))
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group m-t-10 m-b-30 m-l-20">
+                                <img class="img-icon" src="@Model.IconUrl" alt=""/>
+                            </div>
+                        </div>
+                    }
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="IconImage"></label>
+                            <input type="file" asp-for="IconImage" accept="image/*" class="form-control"/>
+                            <input type="hidden" asp-for="IconUrl"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="HexColor"></label>
+                            <input asp-for="HexColor" type="color" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="CategoryID"></label>
+                            <select asp-for="CategoryID" asp-items="Model?.Categories" class="form-control custom-select"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="TitleID"></label>
+                            <select asp-for="TitleID" asp-items="Model?.Titles" class="form-control custom-select"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

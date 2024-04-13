@@ -1,0 +1,18 @@
+﻿@model NewsSearch
+
+@{
+    ViewData["Title"] = "Новости";
+}
+
+@await Html.PartialAsync("PageHeader")
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <vc:news-search search="Model"></vc:news-search>
+            <div class="card table-responsive" id="searchResult">
+                <vc:news-search-result search="Model"></vc:news-search-result>
+            </div>
+        </div>
+    </div>
+</div>

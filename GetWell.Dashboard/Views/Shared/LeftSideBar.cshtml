@@ -1,0 +1,138 @@
+﻿
+<aside id="leftsidebar" class="sidebar">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">&nbsp;</li>
+    </ul>
+	<div class="tab-content">
+		<div class="tab-pane stretchRight active">
+			<div class="menu">
+                <ul class="list">
+                    <li class="active open"><a href="/"><i class="zmdi zmdi-home"></i><span>Главная</span></a></li>
+                    @if (User.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-calendar-check"></i><span>Записи</span> </a>
+                            <ul class="ml-menu">
+                                <li><a href="@Url.Action("Index", "Appointment")">Поиск</a></li>
+                                <li><a href="@Url.Action("Index", "Calendar")">Календарь</a></li>
+                                @if (User.IsInRole(UserRoles.Clinic) || User.IsInRole(UserRoles.Doctor))
+                                {
+                                    <li><a href="@Url.Action("Add", "Appointment")">Добавить</a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                    
+                    @if (User.IsInRole(UserRoles.Admin))
+                    {
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="material-icons">format_list_bulleted</i><span>Типы Клиник</span> </a>
+                            <ul class="ml-menu">
+                                <li><a href="@Url.Action("Index", "Category")">Список</a></li>
+                                <li><a href="@Url.Action("Add", "Category")">Добавить</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="material-icons">local_hospital</i><span>Клиники</span> </a>
+                            <ul class="ml-menu">
+                                <li><a href="@Url.Action("Index", "Clinic")">Поиск</a></li>
+                                <li><a href="@Url.Action("Add", "Clinic")">Добавить</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Новости</span> </a>
+                            <ul class="ml-menu">
+                                <li><a href="@Url.Action("Index", "News")">Поиск</a></li>
+                                <li><a href="@Url.Action("Add", "News")">Добавить</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-blogger"></i><span>Акции</span> </a>
+                            <ul class="ml-menu">
+                                <li><a href="@Url.Action("Index", "ClinicDiscount")">Поиск</a></li>
+                                <li><a href="@Url.Action("Add", "ClinicDiscount")">Добавить</a></li>
+                            </ul>
+                        </li>
+                    }
+                    @if (User.IsInRole(UserRoles.Clinic))
+                    {
+                        <li><a href="@Url.Action("Profile", "Clinic")"><i class="material-icons">account_box</i><span>Профиль</span> </a></li>
+                        <li><a href="@Url.Action("Index", "ClinicGallery")"><i class="material-icons">collections</i><span>Галерея</span> </a></li>
+                        <li><a href="@Url.Action("Index", "ServiceClinic")"><i class="material-icons">assignment</i><span>Услуги</span> </a></li>
+                    }
+                    @if (User.IsInRole(UserRoles.Doctor))
+                    {
+                        <li><a href="@Url.Action("Profile", "Doctor")"><i class="material-icons">account_box</i><span>Мой Профиль</span> </a></li>
+                        <li><a href="@Url.Action("MyServices", "ServiceClinicDoctor")"><i class="material-icons">assignment</i><span>Мои Услуги</span> </a></li>
+                    }
+                    
+                    @if (User.IsInRole(UserRoles.Clinic) || User.IsInRole(UserRoles.Admin))
+                    {
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="material-icons">people</i><span>Доктора</span> </a>
+                            <ul class="ml-menu">
+                                <li><a href="@Url.Action("Index", "Doctor")">Поиск</a></li>
+                                
+                                @if (User.IsInRole(UserRoles.Clinic))
+                                {
+                                    <li><a href="@Url.Action("Add", "Doctor")">Добавить</a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                    @if (User.IsInRole(UserRoles.Admin))
+                    {
+                        @* <li> *@
+                        @*     <a href="javascript:void(0);" class="menu-toggle"><i class="material-icons">people</i><span>Пациенты</span> </a> *@
+                        @*     <ul class="ml-menu"> *@
+                        @*         <li><a href="@Url.Action("Index", "Patient")">Поиск</a></li> *@
+                        @*         <li><a href="@Url.Action("Add", "Patient")">Добавить</a></li> *@
+                        @*     </ul> *@
+                        @* </li> *@
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="material-icons">format_list_bulleted</i><span>Тип Услуг</span> </a>
+                            <ul class="ml-menu">
+                                <li><a href="@Url.Action("Index", "ServiceCategory")">Поиск</a></li>
+                                <li><a href="@Url.Action("Add", "ServiceCategory")">Добавить</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="material-icons">assignment</i><span>Услуги</span> </a>
+                            <ul class="ml-menu">
+                                <li><a href="@Url.Action("Index", "Service")">Поиск</a></li>
+                                <li><a href="@Url.Action("Add", "Service")">Добавить</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="material-icons">format_list_bulleted</i><span>Должности Врачей</span> </a>
+                            <ul class="ml-menu">
+                                <li><a href="@Url.Action("Index", "Title")">Поиск</a></li>
+                                <li><a href="@Url.Action("Add", "Title")">Добавить</a></li>
+                            </ul>
+                        </li>
+                    }
+                    
+                    <li><a href="@Url.Action("ChangePassword", "Account")"><i class="material-icons">account_box</i><span>Сменить Пароль</span> </a></li>
+
+                    @*<li>
+            <a href="javascript:void(0);" class="menu-toggle"><i class="material-icons">people_outline</i><span>Patients</span> </a>
+            <ul class="ml-menu">
+                <li><a href="patients.html">All Patients</a></li>
+                <li><a href="add-patient.html">Add Patient</a></li>
+                <li><a href="patient-profile.html">Patient Profile</a></li>
+                <li><a href="patient-invoice.html">Invoice</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-balance-wallet"></i><span>Payments</span> </a>
+            <ul class="ml-menu">
+                <li><a href="payments.html">Payments</a></li>
+                <li><a href="add-payments.html">Add Payment</a></li>
+                <li><a href="invoice.html">Invoice</a></li>
+            </ul>
+        </li>*@
+                </ul>
+			</div>
+		</div>
+	</div>
+</aside>

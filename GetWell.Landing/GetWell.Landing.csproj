@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+    <Content Remove="wwwroot\android-chrome-192x192.png" />
+    <Content Remove="wwwroot\android-chrome-512x512.png" />
+    <Content Remove="wwwroot\apple-touch-icon.png" />
+    <Content Remove="wwwroot\favicon-16x16.png" />
+    <Content Remove="wwwroot\favicon-32x32.png" />
+    <Content Remove="wwwroot\favicon.ico" />
+    <Content Remove="wwwroot\site.webmanifest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Home\Terms.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\Footer.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\Navbar.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\android-chrome-192x192.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\android-chrome-512x512.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\apple-touch-icon.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\favicon-16x16.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\favicon-32x32.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
+    <None Include="wwwroot\android-chrome-192x192.png" />
+    <None Include="wwwroot\android-chrome-512x512.png" />
+    <None Include="wwwroot\apple-touch-icon.png" />
+    <None Include="wwwroot\favicon-16x16.png" />
+    <None Include="wwwroot\favicon-32x32.png" />
+    <None Include="wwwroot\favicon.ico" />
+    <None Include="wwwroot\site.webmanifest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shared\Navbar.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shared\Footer.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Home\Terms.cshtml" />
+  </ItemGroup>
+
+</Project>

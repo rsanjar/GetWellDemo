@@ -1,0 +1,11 @@
+﻿@model Appointment
+
+@{
+    ViewData["Title"] = Model.ID > 0 ? $"{Model.Patient.FullName} - Редактировать Запись" : "Добавить Новую Запись";
+}
+
+@await Html.PartialAsync("PageHeader")
+
+<div class="container-fluid">
+    @await Html.PartialAsync("SaveForm", Model)
+</div>

@@ -1,0 +1,26 @@
+﻿@model ServiceClinicDoctorModel
+
+@{
+    ViewData["Title"] = "Услуги Доктора";
+}
+
+@await Html.PartialAsync("PageHeader")
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            @foreach (var category in Model.ServiceCategories)
+            {
+                Model.CategoryID = category.Key;
+                Model.CategoryName = category.Value;
+
+                await Html.RenderPartialAsync("Cards/Save", Model);
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("PageScripts/IndexScripts", Model); }
+}

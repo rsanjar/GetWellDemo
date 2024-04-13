@@ -1,0 +1,81 @@
+﻿@model PaginatedList<Appointment>
+
+<table class="table table-bordered table-striped table-hover dataTable">
+    <thead>
+        <tr>
+            @if (User.IsInRole(UserRoles.Admin))
+            {
+                <th class="sorting" sort-id="@nameof(Appointment.ClinicName)">Клиника</th>
+            }
+            @if (User.IsInRole(UserRoles.Admin) || User.IsInRole(UserRoles.Clinic))
+            {
+                <th class="sorting" sort-id="@nameof(Appointment.DoctorName)">Врач</th>
+            }
+            <th class="sorting" sort-id="@nameof(Appointment.PatientName)">Пациент</th>
+            <th class="sorting" sort-id="@nameof(Appointment.ServiceName)">Услуга</th>
+            <th>Телефон Пациента</th>
+            <th class="sorting" sort-id="@nameof(Appointment.AppointmentDate)">Дата Встречи</th>
+            <th class="sorting" sort-id="@nameof(Appointment.DateCreated)">Дата Создания</th>
+            <th class="sorting" sort-id="@nameof(Appointment.IsDoctorConfirmed)">Статус</th>
+
+            @if (User.IsInRole(UserRoles.Admin))
+            {
+                <th>Детали</th>
+            }
+            else
+            {
+                <th>Изменить</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            string status = "<span class=\"badge badge-dark bg-warning\">Новая</span>";
+
+            if (i.IsDoctorConfirmed.GetValueOrDefault(false) && !i.IsArchived)
+            {
+                status = "<span class=\"badge badge-dark bg-info\">Подтверждена</span>";
+            }
+            if (i.IsDoctorConfirmed.GetValueOrDefault(false) && i.IsArchived)
+            {
+                status = "<span class=\"badge badge-dark bg-success\">Выполнена</span>";
+            }
+            if (i.IsCanceled)
+            {
+                status = "<span class=\"badge badge-dark bg-primary\">Отменена</span>";
+            }
+            
+            <tr>
+                @if (User.IsInRole(UserRoles.Admin))
+                {
+                    <td>@i.ClinicName</td>
+                }
+                @if (User.IsInRole(UserRoles.Admin) || User.IsInRole(UserRoles.Clinic))
+                {
+                    <td>@i.DoctorName</td>
+                }
+                <td>@i.PatientName</td>
+                <td>@i.ServiceName</td>
+                <td>@i.Patient.Phone</td>
+                <td>@i.AppointmentDate.ToString("d") @i.AppointmentTime.ToString("hh\\:mm")</td>
+                <td>@i.DateCreated.ToString("G")</td>
+                <td>@Html.Raw(status)</td>
+                <td class="text-center">
+                    @if (User.IsInRole(UserRoles.Admin))
+                    {
+                        <a asp-action="Edit" asp-controller="Appointment" asp-route-id="@i.ID" title="Детали"><i class="material-icons">description</i></a>
+                    }
+                    else
+                    {
+                        <a asp-action="Edit" asp-controller="Appointment" asp-route-id="@i.ID" title="Редактировать"><i class="material-icons">edit</i></a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation">
+    @await Html.PartialAsync("Pagination", Model)
+</nav>

@@ -1,0 +1,98 @@
+﻿@model ClinicDiscount
+
+<div class="row clearfix">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    <strong>Базовая</strong> Информация
+                    <small>Данные Акции...</small>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row">
+                    @if (Model != null && !string.IsNullOrWhiteSpace(Model.ImageUrl))
+                    {
+                        <div class="col-sm-12 col-lg-6">
+                            <div class="form-group m-t-10 m-b-30 m-l-20">
+                                <img class="img" src="@Model.ImageUrl" alt="" />
+                            </div>
+                        </div>
+                    }
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="DiscountImage"></label>
+                            <input type="file" asp-for="DiscountImage" accept="image/*" class="form-control" />
+                            <input type="hidden" asp-for="ImageUrl" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="Title"></label>
+                            <input asp-for="Title" type="text" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <textarea id="ckeditor" name="Body">@Html.Raw(Model?.Body)</textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="TitleUz"></label>
+                            <input asp-for="TitleUz" type="text" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <textarea id="ckeditor1" name="BodyUz">@Html.Raw(Model?.BodyUz)</textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="TitleEn"></label>
+                            <input asp-for="TitleEn" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <textarea id="ckeditor2" name="BodyEn">@Html.Raw(Model?.BodyEn)</textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="DiscountPercentageInt"></label>
+                            <input asp-for="DiscountPercentageInt" type="number" min="0" max="100" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="PriceBeforeDiscountInt"></label>
+                            <input asp-for="PriceBeforeDiscountInt" type="money" class="form-control money" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="StartDate"></label>
+                            <input asp-for="StartDate" value="@Model?.StartDate.ToLocalDate(DateTime.UtcNow.ToString("dd-MM-yyyy"))" type="text" class="datetimepicker form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="EndDate"></label>
+                            <input asp-for="EndDate" value="@Model?.EndDate.ToLocalDate(DateTime.UtcNow.ToString("dd-MM-yyyy"))" type="text" class="datetimepicker form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group m-t-5 m-b-15">
+                            <div class="checkbox">
+                                <input asp-for="IsActive" type="checkbox" class="form-control"/>
+                                <label asp-for="IsActive"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

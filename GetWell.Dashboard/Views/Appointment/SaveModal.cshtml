@@ -1,0 +1,31 @@
+﻿@model Appointment
+
+<div class="modal fade" id="appointmentModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                @if (Model.ID > 0)
+                {
+                    <h4 class="title" id="appointmentModalLabel">@Model.ClinicName - @Model.PatientName - @Model.ServiceName</h4>
+                }
+                else
+                {
+                    <h4 class="title" id="appointmentModalLabel">Добавить новую бронь</h4>
+                }
+            </div>
+            <div class="modal-body">
+                @await Html.PartialAsync("SaveForm", Model)
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect mx-auto" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        initAppointmentAjaxNotifications();
+        initInputMasks();
+    });
+</script>

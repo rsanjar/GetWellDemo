@@ -1,0 +1,38 @@
+﻿@model PaginatedList<Patient>
+
+<table class="table table-bordered table-striped table-hover dataTable">
+    <thead>
+        <tr>
+            <th class="sorting" sort-id="@nameof(Patient.FirstName)">Имя</th>
+            <th class="sorting" sort-id="@nameof(Patient.LastName)">Фамилия</th>
+            <th class="sorting" sort-id="@nameof(Patient.ClinicName)">Клиника</th>
+            <th class="sorting" sort-id="@nameof(Patient.Phone)">Телефон</th>
+            <th class="sorting" sort-id="@nameof(Patient.PatientProfile.DateOfBirth)">Дата Рождения</th>
+            <th class="sorting" sort-id="@nameof(Patient.DateCreated)">Дата Регистрации</th>
+            <th>Изменить</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            var dob = i.PatientProfile.DateOfBirth.HasValue ? i.PatientProfile.DateOfBirth.GetValueOrDefault().ToString("dd-MMM-yyyy") : "-----";
+        <tr>
+            <td><span class="list-name">@i.FirstName</span></td>
+            <td><span class="list-name">@i.LastName</span></td>
+            <td><span class="list-name">@i.ClinicName</span></td>
+            <td>@i.Phone</td>
+            <td>@dob</td>
+            <td>@i.DateCreated.ToString("dd-MMM-yyyy HH:mm")</td>
+            <td class="text-center">
+                <a asp-action="Edit" asp-controller="Patient" asp-route-id="@i.ID" title="Редактировать">
+                    <i class="material-icons">edit</i>
+                </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation">
+    @await Html.PartialAsync("Pagination", Model)
+</nav>

@@ -1,0 +1,35 @@
+﻿
+@model Doctor
+
+@{
+    ViewData["Title"] = Model != null && Model.ID > 0 ? $"{Model.FullName} - Редактировать Данные Доктора" : $"Добавить Нового Доктора - {Model?.ClinicName}";
+}
+
+@await Html.PartialAsync("PageHeader")
+
+<div class="container-fluid">
+    <form enctype="multipart/form-data" data-ajax-url="@(Model.ID > 0 ? Url.Action("Save", "Doctor") : Url.Action("AddNew", "Doctor"))"
+          data-ajax-begin="begin" data-ajax-loading="#fountainG"
+          data-ajax-method="post" data-ajax="true" data-ajax-mode="replace"
+          data-ajax-update="#SaveFormMessageID" data-ajax-complete="complete">
+
+        @{ await Html.RenderPartialAsync("Cards/DoctorCard", Model); }
+
+        @{ await Html.RenderPartialAsync("Cards/DoctorProfileCard", Model); }
+
+        @{ await Html.RenderPartialAsync("Cards/DoctorPhoneCard", Model); }
+
+        @{ await Html.RenderPartialAsync("Cards/ClinicDoctorAccountCard", Model); }
+        
+        @{ await Html.RenderPartialAsync("Cards/ClinicDoctorWorkDayCard", Model); }
+
+        @{ await Html.RenderPartialAsync("FormSubmitSection"); }
+        
+        <input asp-for="ID" type="hidden"/>
+    </form>
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("PageScripts/SaveScript", Model); }
+}

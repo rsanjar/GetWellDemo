@@ -1,0 +1,92 @@
+﻿@model Doctor
+
+<div class="row clearfix">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    <strong>Профиль</strong> Доктора
+                    <small>Дополнительная информация доктора...</small>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row">
+                    @if (Model != null && Model.Profile != null && !string.IsNullOrWhiteSpace(Model.Profile.ProfilePictureUrl))
+                    {
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <img src="@(Model.Profile.ProfilePictureUrl)?c=@Guid.NewGuid()" class="img img-doctor-avatar" alt=""/>
+                            </div>
+                        </div>
+                    }
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Profile.ProfilePicture"></label>
+                            <input type="file" asp-for="Profile.ProfilePicture" accept="image/*" class="form-control"/>
+                            <input type="hidden" asp-for="Profile.ProfilePictureUrl"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Profile.HomeAddress"></label>
+                            <input asp-for="Profile.HomeAddress" type="text" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Profile.Street"></label>
+                            <input asp-for="Profile.Street" type="text" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Profile.District"></label>
+                            <input asp-for="Profile.District" type="text" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Profile.CityID"></label>
+                            <select asp-for="Profile.CityID" asp-items="Model?.Profile?.Cities" class="form-control custom-select"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Profile.RegionID"></label>
+                            <select asp-for="Profile.RegionID" disabled="disabled" class="form-control custom-select">
+                                <option>Регион</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Profile.IsMale" class="text-danger"></label>
+                            <select asp-for="Profile.IsMale" class="form-control custom-select">
+                                <option value="true">Мужчина</option>
+                                <option value="false">Женщина</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Profile.MedicalTitle"></label>
+                            <input asp-for="Profile.MedicalTitle" type="text" class="form-control"/>
+                        </div>
+                    </div>
+                    @* <div class="col-sm-6"> *@
+                    @*     <div class="form-group"> *@
+                    @*         <label asp-for="Profile.TaxpayerID"></label> *@
+                    @*         <input asp-for="Profile.TaxpayerID" type="text" class="form-control"/> *@
+                    @*     </div> *@
+                    @* </div> *@
+                    <div class="col-sm-12">
+                        <div class="form-group m-t-30">
+                            <label asp-for="Profile.About"></label>
+                            <textarea asp-for="Profile.About" rows="5" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

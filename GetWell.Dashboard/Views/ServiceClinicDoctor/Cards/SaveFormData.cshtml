@@ -1,0 +1,51 @@
+﻿@model ServiceClinicDoctorModel
+
+@{
+    Layout = null;
+}
+
+@for (var i = 0; i < Model.GetCurrentList.Count; i++)
+{
+    int index = i;
+    var val = Model.GetCurrentList[index];
+
+    <tr>
+        <td>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <div class="check-box m-t-15 m-b-10">
+                        <input type="checkbox" asp-for="ServiceClinicDoctors[Model.CategoryID][index].Active" />
+                        <label class="checkbox-label" asp-for="ServiceClinicDoctors[Model.CategoryID][index].Active">
+                            @Model.ServiceClinicDoctors[Model.CategoryID][index].Service.Name
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                    <div class="form-group m-t-15 m-b-10">
+                        <label asp-for="ServiceClinicDoctors[Model.CategoryID][index].PriceInt"></label>
+                        <input type="number" asp-for="ServiceClinicDoctors[Model.CategoryID][index].PriceInt" value="@val.PriceInt" class="form-control" />
+                        <input type="hidden" asp-for="ServiceClinicDoctors[Model.CategoryID][index].ServiceID" value="@val.ServiceID" />
+                        <input type="hidden" asp-for="ServiceClinicDoctors[Model.CategoryID][index].ClinicID" value="@val.ClinicID" />
+                        <input type="hidden" asp-for="ServiceClinicDoctors[Model.CategoryID][index].DoctorID" value="@val.DoctorID" />
+                        <input type="hidden" asp-for="ServiceClinicDoctors[Model.CategoryID][index].ServiceClinicID" value="@val.ServiceClinicID" />
+                        <input type="hidden" asp-for="ServiceClinicDoctors[Model.CategoryID][index].ClinicDoctorID" value="@val.ClinicDoctorID" />
+                        <input type="hidden" asp-for="ServiceClinicDoctors[Model.CategoryID][index].ID" value="@val.ID" />
+                        <input type="hidden" asp-for="ServiceClinicDoctors[Model.CategoryID][index].DateCreated" value="@val.DateCreated" />
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12 col-md-6 col-lg-3">
+                    <div class="form-group m-t-15 m-b-10">
+                        <label asp-for="ServiceClinicDoctors[Model.CategoryID][index].Duration"></label>
+                        <input type="number" asp-for="ServiceClinicDoctors[Model.CategoryID][index].Duration" value="@val.Duration" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+                    <div class="form-group m-t-15 m-b-10">
+                        <label asp-for="ServiceClinicDoctors[Model.CategoryID][index].Description"></label>
+                        <textarea asp-for="ServiceClinicDoctors[Model.CategoryID][index].Description" rows="1" value="@val.Description" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+}

@@ -1,0 +1,24 @@
+﻿@model ServiceSearch
+
+<div class="card">
+    <div class="header">
+        <h2><strong>Поиск</strong> Услуг</h2>
+    </div>
+    <div class="body">
+        <form data-ajax-url="@Url.Action("SearchResult", "Service")"
+              data-ajax-begin="begin" data-ajax-loading="#fountainG"
+              data-ajax-method="post" data-ajax="true" data-ajax-mode="replace"
+              data-ajax-update="#searchResult" data-ajax-complete="complete">
+
+            <div class="row clearfix">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <select asp-for="ServiceCategoryID" asp-items="Model.ServiceCategories" class="form-control custom-select"></select>
+                    </div>
+                </div>
+            </div>
+
+            @{ await Html.RenderPartialAsync("SearchFormSubmitSection", Model); }
+        </form>
+    </div>
+</div>

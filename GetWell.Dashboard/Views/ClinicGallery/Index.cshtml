@@ -1,0 +1,45 @@
+﻿@model Clinic
+
+@{
+    ViewData["Title"] = Model.Name + " - Галерея Клиники";
+    ViewData["PageMainCssClass"] = "file_manager";
+}
+
+@await Html.PartialAsync("PageHeader")
+
+@section Styles
+    {
+    <link rel="stylesheet" href="~/assets/plugins/light-gallery/css/lightgallery.css" />
+}
+
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-md-12">
+                <h5>
+                    <a href="#" onclick="$('#GalleryUploadModal').modal('show');return false;" class="btn btn-warning py-2">
+                        <i class="material-icons align-middle">local_hospital</i> Добавить Фото
+                    </a>
+                </h5>
+
+                <div class="tab-content m-t-80" id="searchResult">
+                    <vc:clinic-gallery-photos clinic-id="@Model.ID"></vc:clinic-gallery-photos>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Modals
+    {
+    @{
+        await Html.RenderPartialAsync("Upload", new ClinicGallery { ClinicID = Model.ID, ClinicName = Model.Name });
+    }
+    }
+
+    @section Scripts
+    {
+    <script src="~/assets/plugins/light-gallery/js/lightgallery-all.min.js"></script>
+
+    @{
+        await Html.RenderPartialAsync("PageScripts/Default");
+    }
+    }

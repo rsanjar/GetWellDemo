@@ -1,0 +1,31 @@
+﻿@model Appointment
+
+@{
+    Layout = null;
+}
+
+<div id="appointmentFormBox">
+    <form data-ajax-url="@Url.Action("Save", "Appointment")"
+          data-ajax-begin="begin" data-ajax-loading="#fountainG"
+          data-ajax-method="post" data-ajax="true" data-ajax-mode="replace"
+          data-ajax-update="#SaveFormMessageID" data-ajax-complete="complete">
+
+        @{ await Html.RenderPartialAsync("Cards/PatientCard", Model); }
+            
+        @{ await Html.RenderPartialAsync("Cards/ServiceCard", Model); }
+
+        @{ await Html.RenderPartialAsync("Cards/AppointmentCard", Model); }
+            
+        @{
+            if ((User.IsInRole(UserRoles.Clinic) || User.IsInRole(UserRoles.Doctor)) && !Model.IsArchived && !Model.IsCanceled)
+            {
+                await Html.RenderPartialAsync("FormSubmitSection");
+            }
+        }
+
+        <input asp-for="ID" type="hidden" />
+    </form>
+</div>
+@{
+    await Html.RenderPartialAsync("PageScripts/SaveScript", Model);
+}

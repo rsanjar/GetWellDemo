@@ -1,0 +1,19 @@
+﻿@model PatientSearch
+
+@{
+    ViewData["Title"] = "Пациенты";
+}
+
+@await Html.PartialAsync("PageHeader")
+
+<div class="container-fluid">
+	<div class="row clearfix">
+        <div class="col-md-12">
+            <vc:patient-search search="Model"></vc:patient-search>
+            <div class="card table-responsive" id="searchResult">
+                <vc:patient-search-result search="Model"></vc:patient-search-result>
+            </div>
+        </div>
+	</div>
+</div>
+

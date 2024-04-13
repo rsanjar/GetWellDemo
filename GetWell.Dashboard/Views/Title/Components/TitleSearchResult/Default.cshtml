@@ -1,0 +1,23 @@
+﻿@model List<Title>
+
+<table class="table table-bordered table-striped table-hover dataTable">
+    <thead>
+        <tr>
+            <th>Название Должности</th>
+            <th>Активна</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td><span class="list-name">@i.Name</span></td>
+                <td>@(i.Active ? "Да" : "Нет")</td>
+                <td class="text-center">
+                    <a asp-action="Edit" asp-controller="Title" asp-route-id="@i.ID" title="Редактировать"><i class="material-icons">edit</i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,21 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = Model != null && Model.ID > 0 ? $"{Model.Name} - Редактировать Тип Клиники" : "Добавить Новый Тип Клиники";
+}
+
+@await Html.PartialAsync("PageHeader")
+
+<div class="container-fluid">
+    <form enctype="multipart/form-data" data-ajax-url="@(Model.ID > 0 ? Url.Action("Edit", "Category") : Url.Action("Add", "Category"))"
+          data-ajax-begin="begin" data-ajax-loading="#fountainG"
+          data-ajax-method="post" data-ajax="true" data-ajax-mode="replace"
+          data-ajax-update="#SaveFormMessageID" data-ajax-complete="complete">
+
+        @{ await Html.RenderPartialAsync("Cards/CategoryCard", Model); }
+
+        @{ await Html.RenderPartialAsync("FormSubmitSection"); }
+
+        <input asp-for="ID" type="hidden"/>
+    </form>
+</div>

@@ -1,0 +1,62 @@
+﻿@model ClinicDiscountSearch
+
+<div class="card">
+    <div class="header">
+        <h2><strong>Поиск</strong> Акции</h2>
+    </div>
+    <div class="body">
+        <form data-ajax-url="@Url.Action("SearchResult", "ClinicDiscount")"
+              data-ajax-begin="begin" data-ajax-loading="#fountainG"
+              data-ajax-method="post" data-ajax="true" data-ajax-mode="replace"
+              data-ajax-update="#searchResult" data-ajax-complete="complete">
+
+            <div class="row clearfix">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <select asp-for="ClinicID" asp-items="Model.Clinics" class="form-control custom-select"></select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <select asp-for="CityID" asp-items="Model.Cities" class="form-control custom-select"></select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <select asp-for="RegionID" disabled="disabled" class="form-control custom-select">
+                            <option>Регион</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <div class="checkbox">
+                            <input asp-for="IsActive" class="form-control" />
+                            <label asp-for="IsActive"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @{ await Html.RenderPartialAsync("SearchFormSubmitSection", Model); }
+        </form>        
+    </div>
+</div>
+
+<script type="text/javascript" defer>
+    $(function() {
+        //Datetimepicker plugin
+        $('.datetimepicker').bootstrapMaterialDatePicker({
+            format: 'DD-MMM-YYYY',
+            clearButton: true,
+            weekStart: 1,
+            date: true,
+            time: false
+            //maxDate: Date.now
+        });
+
+        $('form #CityID').on('change', function() {
+            ajaxLoadSelect('/api/region/getall/', this.value, 'form #RegionID', 'Регион');
+        });
+    });
+</script>

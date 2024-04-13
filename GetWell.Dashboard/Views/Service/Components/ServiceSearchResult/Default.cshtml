@@ -1,0 +1,32 @@
+﻿@model PaginatedList<Service>
+
+<table class="table table-bordered table-striped table-hover dataTable">
+    <thead>
+        <tr>
+            <th>Иконка</th>
+            <th class="sorting" sort-id="@nameof(Service.Name)">Название</th>
+            <th class="sorting" sort-id="@nameof(Service.ServiceCategoryName)">Тип Услуги</th>
+            <th class="sorting" sort-id="@nameof(Service.IsActive)">Активный</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td class="padding-0 text-center align-middle"><img src="@i.IconUrl" class="img-icon" alt="" /></td>
+            <td><span class="list-name">@i.Name</span></td>
+            <td>@i.ServiceCategoryName</td>
+            <td>@(i.Active ? "Да" : "Нет")</td>
+            <td class="text-center">
+                <a asp-action="Edit" asp-controller="Service" asp-route-id="@i.ID" title="Редактировать"><i class="material-icons">edit</i></a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation">
+    @await Html.PartialAsync("Pagination", Model)
+</nav>
+

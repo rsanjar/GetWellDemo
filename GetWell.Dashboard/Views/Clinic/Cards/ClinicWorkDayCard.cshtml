@@ -1,0 +1,52 @@
+﻿@using System.Globalization
+@model Clinic
+
+<div class="row clearfix">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    <strong>График</strong> Работы
+                    <small>График работы клиники...</small>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row">
+                    @for (int i = 1; i <= 7; i++)
+                    {
+                        int index = i - 1;
+
+                        <div class="col-2 p-r-5">
+                            <div class="form-group">
+                                <span>
+                                    @if (DateTimeFormatInfo.CurrentInfo != null)
+                                    {
+                                        @DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName((DayOfWeek) (i % 7))
+                                    }
+                                    else
+                                    {
+                                        @((DayOfWeek) (i % 7))
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-5 p-r-5 p-l-5">
+                            <div class="form-group">
+                                <label asp-for="WorkDay[index].OpenTimeNullable"></label>
+                                <input asp-for="WorkDay[index].OpenTimeNullable" value="@Model.WorkDay[index].OpenTimeString" type="time" class="timepicker form-control"/>
+                            </div>
+                        </div>
+                        <div class="col-5 p-l-0">
+                            <div class="form-group">
+                                <label asp-for="WorkDay[index].CloseTimeNullable"></label>
+                                <input asp-for="WorkDay[index].CloseTimeNullable" value="@Model.WorkDay[index].CloseTimeString" type="time" class="timepicker form-control"/>
+                                <input asp-for="WorkDay[index].WeekDayID" type="hidden"/>
+                                <input asp-for="WorkDay[index].ID" type="hidden"/>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

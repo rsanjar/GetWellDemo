@@ -1,0 +1,84 @@
+
+@media only screen and (max-width: 993px) {
+    .fc {
+
+        .fc-toolbar {
+            .fc-button-group > .fc-button {
+                line-height: 1;
+                padding: 10px 5px;
+                margin: 0;
+                font-size: 0.8rem;
+            }
+
+            .fc-toolbar-chunk {
+                white-space: nowrap;
+
+                h2 {
+                    &.fc-toolbar-title {
+                        white-space: break-spaces;
+                        text-align: center;
+                    }
+                }
+            }
+
+            .fc-today-button {
+                &.fc-button {
+                    &.fc-button-primary {
+                        margin: 0;
+                        font-size: 0.8rem;
+                        padding: 10px 5px;
+                    }
+                }
+            }
+
+            h2 {
+                &.fc-toolbar-title {
+                    font-size: 0.7rem;
+                    line-height: 1.5;
+                }
+            }
+        }
+
+        .fc-scrollgrid-section {
+
+            .fc-col-header-cell {
+
+                .fc-col-header-cell-cushion {
+                    font-size: 0.7rem;
+                }
+            }
+        }
+
+        .fc-timegrid-slots {
+
+            table {
+                td {
+                    &.fc-timegrid-slot {
+                        font-size: 0.8rem;
+
+                        &.fc-timegrid-slot-label {
+                            font-size: 0.8rem;
+                        }
+                    }
+
+                    &.fc-daygrid-day {
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+        }
+
+        .fc-daygrid-body {
+            table {
+                td {                   
+
+                    &.fc-daygrid-day {
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+

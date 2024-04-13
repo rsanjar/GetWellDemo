@@ -1,0 +1,94 @@
+[
+  {
+    "outputFileName": "wwwroot/css/site.css",
+    "inputFiles": [
+      "wwwroot/scss/bootstrap.min.css",
+      "wwwroot/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css",
+      "wwwroot/assets/plugins/morrisjs/morris.min.css",
+      "wwwroot/assets/plugins/dropzone/dropzone.css",
+      "wwwroot/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css",
+      "wwwroot/assets/plugins/bootstrap-select/css/bootstrap-select.css",
+      "wwwroot/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css",
+      "wwwroot/assets/plugins/sweetalert/sweetalert.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/login-site.css",
+    "inputFiles": [
+      "wwwroot/assets/plugins/bootstrap/css/bootstrap.min.css",
+      "wwwroot/assets/plugins/bootstrap-select/css/bootstrap-select.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/login-site.js",
+    "inputFiles": [
+      "wwwroot/assets/plugins/bootstrap/js/popper.min.js",
+      "wwwroot/js/bootstrap.min.js",
+      "wwwroot/assets/plugins/jquery-slimscroll/jquery.slimscroll.js",
+      "wwwroot/assets/plugins/node-waves/waves.js",
+      "wwwroot/assets/plugins/jquery-sparkline/jquery.sparkline.js",
+      "wwwroot/assets/plugins/jquery-countto/jquery.countTo.js",
+      "wwwroot/admin/assets/js/pages/signin.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/site.js",
+    "inputFiles": [
+      "wwwroot/assets/plugins/bootstrap/js/popper.min.js",
+      "wwwroot/js/bootstrap.min.js",
+      "wwwroot/assets/plugins/jquery-slimscroll/jquery.slimscroll.js",
+      "wwwroot/assets/plugins/node-waves/waves.js",
+      "wwwroot/assets/plugins/jquery-sparkline/jquery.sparkline.js",
+      "wwwroot/assets/plugins/jquery-countto/jquery.countTo.js",
+      "wwwroot/assets/plugins/raphael/raphael.min.js",
+      "wwwroot/assets/plugins/morrisjs/morris.min.js",
+      "wwwroot/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js",
+      "wwwroot/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js",
+      "wwwroot/assets/plugins/jquery-knob/jquery.knob.min.js",
+      "wwwroot/admin/assets/js/admin.js",
+      "wwwroot/assets/plugins/dropzone/dropzone.js",
+      "wwwroot/assets/plugins/momentjs/moment.js",
+      "wwwroot/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js",
+      "wwwroot/assets/plugins/bootstrap-notify/bootstrap-notify.js",
+      "wwwroot/admin/assets/js/pages/ui/notifications.js",
+      "wwwroot/assets/plugins/sweetalert/sweetalert.min.js",
+      "wwwroot/js/pagination.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/jquery.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery/dist/jquery.min.js",
+      "wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "wwwroot/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/jquery-inputmask/index.min.js",
+    "inputFiles": [
+      "wwwroot/js/jquery-inputmask/index.js"
+    ]
+  }
+]

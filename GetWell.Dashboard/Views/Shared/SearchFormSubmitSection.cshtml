@@ -1,0 +1,22 @@
+﻿@model IBasePagination
+
+<div class="row clearfix">
+    <div class="col-sm-12 text-center">
+        <div class="form-group m-t-30">
+            <button type="submit" onclick="Pagination.ResetPagingValues();" class="btn btn-primary btn-wd btn-round submit-button">Поиск</button>
+            <button type="reset" class="btn btn-default btn-round btn-wd btn-simple">Сбросить</button>
+        </div>
+
+        @await Html.PartialAsync("PaginationForm", Model)
+    </div>
+</div>
+
+<script>
+    begin = function () {
+        //$('section.content > #fountainG').show();
+    }
+
+    complete = function () {
+        //$('section.content > #fountainG').hide();
+    }
+</script>

@@ -1,0 +1,38 @@
+﻿@model Doctor
+
+<script type="text/javascript" defer>
+    $(document).ready(function() {
+        //Datetimepicker plugin
+        $('.datetimepicker').bootstrapMaterialDatePicker({
+            clearButton: true,
+            weekStart: 1,
+            language: 'ru',
+            format: 'DD-MM-YYYY',
+            date: true,
+            time: false
+            //maxDate: Date.now
+        });
+
+        $('.timepicker').bootstrapMaterialDatePicker({
+            format: 'HH:mm',
+            clearButton: true,
+            date: false
+        });
+
+        $('#Profile_CityID').on('change',
+            function() {
+                loadRegions(this.value);
+            });
+
+        loadRegions(@Model.Profile.CityID, @Model.Profile.RegionID);
+        loadClinics(0, @Model.ClinicID);
+    });
+
+    function loadRegions(cityId, selectedId) {
+        ajaxLoadSelect('/api/region/getall/', cityId, '#Profile_RegionID', 'Регион', selectedId);
+    }
+
+    function loadClinics(cityId, selectedId) {
+        ajaxLoadSelect('/api/clinic/get-all-key-value/', cityId, '#ClinicID', 'Клиника', selectedId);
+    }
+</script>

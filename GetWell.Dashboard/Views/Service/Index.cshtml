@@ -1,0 +1,18 @@
+﻿@model ServiceSearch
+
+@{
+    ViewData["Title"] = "Услуги";
+}
+
+@await Html.PartialAsync("PageHeader")
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <vc:service-search search="Model"></vc:service-search>
+            <div class="card table-responsive" id="searchResult">
+                <vc:service-search-result search="Model"></vc:service-search-result>
+            </div>
+        </div>
+    </div>
+</div>

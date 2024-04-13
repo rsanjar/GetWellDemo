@@ -1,0 +1,129 @@
+﻿@model IBasePagination
+
+@{
+    Layout = null;
+    const int maxPagingButtonCount = 6;
+    int pagingRange = (int)Math.Floor(maxPagingButtonCount / 2.00);
+    int startNumber = Model.PageNumber - pagingRange > 1 ? Model.PageNumber - pagingRange : 1;
+    int maxPage = startNumber + maxPagingButtonCount > Model.TotalPages ? Model.TotalPages : startNumber + maxPagingButtonCount;
+}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.pagination #pageSizeList').val(@Model.PageSize);
+
+        Pagination.BindTableSortClick();
+        $('#TotalCount').val(@Model.TotalCount);
+        $('#PageSize').val(@Model.PageSize);
+        $('#PageNumber').val(@Model.PageNumber);
+        Pagination.TotalCount = @Model.TotalCount;
+        Pagination.Pagesize = @Model.PageSize;
+        Pagination.PageNumber = @Model.PageNumber;
+    });
+
+    function submitPagination(action, page) {
+        var pageNumber = @Model.PageNumber;
+
+        if (action === 'previous') {
+            pageNumber--;
+        }
+        if (action === 'next')
+            pageNumber++;
+
+        if (action === 'set')
+            pageNumber = page;
+
+        if (action === 'reset')
+            pageNumber = 1;
+
+        if (action !== 'reset' && pageNumber === $('#@nameof(IBasePagination.PageNumber)').val() * 1) return false;
+
+        $('#@nameof(IBasePagination.PageNumber)').val(pageNumber);
+        $('#@nameof(IBasePagination.PageSize)').val($('.pagination #pageSizeList').val()); //needed if pageSize is to be set from the UI
+
+        $('.submit-button').closest('form').submit();
+
+        return false;
+    }
+</script>
+
+
+<ul class="pagination pagination-info justify-content-end m-b-0 p-15 bg-default">
+    <li class="p-r-30">
+        <select id="pageSizeList" name="pageSizeList" class="custom-select-sm" onchange="return submitPagination('reset');">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+        </select>
+    </li>
+    @if (!Model.IsFirstPage)
+    {
+        <li class="page-item">
+            <a href="#" class="page-link" onclick="return submitPagination('set', 1);">Первая</a>
+        </li>
+    }
+    else
+    {
+        <li class="page-item disabled">
+            <a href="#" class="page-link" onclick="return false;">Первая</a>
+        </li>
+    }
+
+    @if (Model.HasPreviousPage)
+    {
+        <li class="page-item">
+            <a href="#" class="page-link" onclick="return submitPagination('previous');">Пред.</a>
+        </li>
+    }
+    else
+    {
+        <li class="page-item disabled">
+            <a href="#" class="page-link" onclick="return false;">Пред.</a>
+        </li>
+    }
+
+    @for (int i = startNumber; i <= maxPage; i++)
+    {
+        if (i == Model.PageNumber)
+        {
+            <li class="page-item active">
+                <a href="#" class="hidden-xs page-link" onclick="return false;">@i</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item">
+                <a href="#" class="hidden-xs page-link" onclick="return submitPagination('set', @i);">@i</a>
+            </li>
+        }
+    }
+
+    @if (Model.HasNextPage)
+    {
+        <li class="page-item">
+            <a href="#" class="page-link" onclick="return submitPagination('next');">След.</a>
+        </li>
+    }
+    else
+    {
+        <li class="page-item disabled">
+            <a href="#" class="page-link" onclick="return false;">След.</a>
+        </li>
+    }
+
+    @if (!Model.IsLastPage)
+    {
+        <li class="page-item">
+            <a href="#" class="page-link" onclick="return submitPagination('set', @Model.TotalPages);">Послед.</a>
+        </li>
+    }
+    else
+    {
+        <li class="page-item disabled">
+            <a href="#" class="page-link" onclick="return false;">Послед.</a>
+        </li>
+    }
+</ul>

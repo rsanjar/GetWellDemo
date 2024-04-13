@@ -1,0 +1,115 @@
+﻿@model Doctor
+
+@if (!string.IsNullOrWhiteSpace(Model.ClinicName))
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="header">
+                    <h2 class="mt-2 mb-5 text-primary fw-bold">Клиника - @Model?.ClinicName</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div class="row clearfix">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    <strong>Базовая</strong> Информация
+                    <small>Основные данные доктора...</small>
+                </h2>
+            </div>
+            <div class="body">
+                @if (User.IsInRole(UserRoles.Admin) && Model?.ClinicID <= 0)
+                {
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="ClinicID"></label>
+                                <select asp-for="ClinicID" disabled="disabled" class="form-control custom-select">
+                                    <option>Клиника</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <input asp-for="ClinicID" type="hidden" />
+                }
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="FirstName"></label>
+                            <input asp-for="FirstName" type="text" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="LastName"></label>
+                            <input asp-for="LastName" type="text" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="MiddleName"></label>
+                            <input asp-for="MiddleName" type="text" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" type="email" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="DateOfBirth"></label>
+                            <input asp-for="DateOfBirth" value="@Model.DateOfBirth.ToLocalDate("01-01-1980")" type="text" class="datetimepicker form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="CareerStartDate"></label>
+                            <input asp-for="CareerStartDate" value="@Model.CareerStartDate.ToLocalDate("01-01-1990")" type="text" class="datetimepicker form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group m-t-5 m-b-15">
+                            <div class="checkbox">
+                                <input asp-for="IsFamilyDoctor" type="checkbox" class="form-control"/>
+                                <label asp-for="IsFamilyDoctor"></label>
+                            </div>
+                        </div>
+                    </div>
+                    @if (User.IsInRole(UserRoles.Admin) || User.IsInRole(UserRoles.Clinic))
+                    {
+                        <div class="col-sm-6">
+                            <div class="input-group m-t-5 m-b-15">
+                                <div class="checkbox">
+                                    <input asp-for="Active" type="checkbox" class="form-control"/>
+                                    <label asp-for="Active"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-group m-t-5 m-b-15">
+                                <div class="checkbox">
+                                    <input asp-for="IsRetired" type="checkbox" class="form-control"/>
+                                    <label asp-for="IsRetired"></label>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <input type="hidden" asp-for="Active"/>
+                        <input type="hidden" asp-for="IsRetired"/>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

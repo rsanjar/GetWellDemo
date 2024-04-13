@@ -1,0 +1,51 @@
+﻿@model PaginatedList<Clinic>
+
+<table class="table table-bordered table-striped table-hover dataTable">
+    <thead>
+        <tr>
+            <th></th>
+            <th class="sorting" sort-id="@nameof(Clinic.Name)">Название</th>
+            <th class="sorting" sort-id="@nameof(Clinic.Private)">Частная</th>
+            <th class="sorting" sort-id="@nameof(Clinic.CityName)">Город</th>
+            <th class="sorting" sort-id="@nameof(Clinic.RegionName)">Район</th>
+            <th class="sorting" sort-id="@nameof(Clinic.Address)">Адрес</th>
+            <th class="sorting" sort-id="@nameof(Clinic.Website)">Вебсайт</th>
+            <th class="sorting" sort-id="@nameof(Clinic.DateCreated)">Регистрация</th>
+            <th>Добавить Врача</th>
+            <th>Изменить</th>
+            <th>Галерея</th>
+            <th>Услуги</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td class="padding-0 text-center"><img src="@i.LogoUrl" style="max-height: 50px;" class="img-thumbnail" alt="" /></td>
+                <td><span class="list-name">@i.Name</span></td>
+                <td>@(i.Private ? "Да" : "Нет")</td>
+                <td>@i.CityName</td>
+                <td>@i.RegionName</td>
+                <td>@i.Address</td>
+                <td><a href="@i.Website" target="_blank">@i.Website</a></td>
+                <td>@i.DateCreated.ToString("dd-MMM-yyyy HH:mm")</td>
+                <td class="text-center">
+                    <a asp-action="Add" asp-controller="Doctor" asp-route-clinicID="@i.ID" target="_blank" title="Добавить нового врача для @(i.Name)"><i class="material-icons">add</i></a>
+                </td>
+                <td class="text-center">
+                    <a asp-action="Edit" asp-controller="Clinic" asp-route-id="@i.ID" target="_blank" title="Редактировать @(i.Name)"><i class="material-icons">edit</i></a>
+                </td>
+                <td class="text-center">
+                    <a asp-action="Index" asp-controller="ClinicGallery" asp-route-clinicID="@i.ID" target="_blank" title="Галерея @(i.Name)"><i class="material-icons">photo</i></a>
+                </td>
+                <td class="text-center">
+                    <a asp-action="Index" asp-controller="ServiceClinic" asp-route-clinicID="@i.ID" target="_blank" title="Услуги @(i.Name)"><i class="material-icons">assignment</i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation">
+    @await Html.PartialAsync("Pagination", Model)
+</nav>

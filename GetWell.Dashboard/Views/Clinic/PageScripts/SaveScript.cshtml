@@ -1,0 +1,33 @@
+﻿@model Clinic
+
+<script type="text/javascript" defer>
+    $(document).ready(function() {
+        //Datetimepicker plugin
+        $('.datetimepicker').bootstrapMaterialDatePicker({
+            clearButton: true,
+            weekStart: 1,
+            language: 'ru',
+            format: 'DD-MM-YYYY',
+            date: true,
+            time: false
+            //maxDate: Date.now
+        });
+
+        $('.timepicker').bootstrapMaterialDatePicker({
+            format: 'HH:mm',
+            clearButton: true,
+            date: false
+        });
+
+        $('#CityID').on('change',
+            function() {
+                loadRegions(this.value);
+            });
+
+        loadRegions(@Model.CityID, @Model.RegionID);
+    });
+
+    function loadRegions(cityId, selectedId) {
+        ajaxLoadSelect('/api/region/getall/', cityId, '#RegionID', 'Регион', selectedId);
+    }
+</script>

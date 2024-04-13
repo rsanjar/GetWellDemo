@@ -1,0 +1,26 @@
+@model PaginatedList<Appointment>
+@{
+    int counter = 1;
+}
+[
+@foreach (var i in Model)
+{
+    var endDate = i.AppointmentDate.AddDays(i.EndTime.Days);
+    i.AppointmentEndDate = new DateTime(endDate.Year, endDate.Month, endDate.Day, i.EndTime.Hours, i.EndTime.Minutes, 0);
+
+    <text>
+        {
+        "title": "@Html.Raw($"{i.DoctorName} - {Html.Raw(i.ServiceName)} -- Пациент: {Html.Raw(i.PatientName)}")",
+        "start": "@(i.AppointmentDate.ToString("yyyy-MM-dd"))T@(i.AppointmentTime.ToString("c"))",
+        @if (i.AppointmentEndDate.HasValue)
+        {
+            <text>"end": "@(i.AppointmentEndDate.Value.ToString("O"))",</text>
+        }
+        "id": @i.ID,
+        "editable": false
+        }@(Model.Count == counter ? "" : ",")
+    </text>
+
+    counter++;
+}
+]

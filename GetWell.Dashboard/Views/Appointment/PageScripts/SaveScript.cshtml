@@ -1,0 +1,79 @@
+﻿@model Appointment
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        //Datetimepicker plugin
+        $('.datetimepicker').bootstrapMaterialDatePicker({
+            clearButton: true,
+            use24hours: true,
+            weekStart: 1,
+            language: 'ru',
+            format: 'YYYY-MM-DD',
+            date: true,
+            time: false,
+            minDate: new Date()
+            //maxDate: Date.now
+        });
+
+        $('.timepicker').bootstrapMaterialDatePicker({
+            format: 'HH:mm',
+            use24hours: true,
+            clearButton: true,
+            showMeridian: false,
+            date: false
+        });
+
+        $('#appointmentFormBox #AppointmentDate').val('@Model.AppointmentDate.ToString("yyyy-MM-dd")');
+        
+        $('#appointmentFormBox #CityId').on('change',
+            function() {
+                loadRegions(this.value);
+            });
+
+        $('#appointmentFormBox #ServiceClinicID').on('change',
+            function () {
+                loadClinicDoctors(this.value);
+            });
+
+        $('#appointmentFormBox #ServiceClinicID').on('change',
+            function () {
+                loadAppTimeSlots($('#appointmentFormBox #ClinicDoctorID').val(), -1, $('#appointmentFormBox #AppointmentDate').val());
+            });
+
+        $('#ClinicDoctorID').on('change',
+            function () {
+                loadAppTimeSlots(this.value, -1, $('#appointmentFormBox #AppointmentDate').val());
+            });
+
+        $('#appointmentFormBox #AppointmentDate').on('change',
+            function () {
+                loadAppTimeSlots($('#appointmentFormBox #ClinicDoctorID').val(), -1, this.value);
+            });
+
+        $('#appointmentFormBox #AppointmentTimeStr').on('change',
+            function () {
+                $('#appointmentFormBox #AppointmentTime').val(this.value);
+            });
+        
+        loadRegions(@Model.Patient.PatientProfile.CityID, @Model.Patient.PatientProfile.RegionID);
+        loadServiceClinics(@Model.ClinicID, @Model.ServiceClinicID);
+        loadClinicDoctors(@Model.ServiceClinicID,@Model.ClinicDoctorID);
+        loadAppTimeSlots(@Model.ClinicDoctorID, '@Model.AppointmentTime.Hours' + ':' + '@Model.AppointmentTime.Minutes.ToString().PadLeft(2, '0')', '@Model.AppointmentDate.ToString("yyyy-MM-dd")');
+    });
+
+    function loadAppTimeSlots(clinicDoctorId, selectedId, date) {
+        ajaxLoadSelectTimeSlot('/api/ClinicDoctorWorkDay/get-doctor-time-slots/' + clinicDoctorId + '?date=' + date + '&slotMinutes=15', '', '#appointmentFormBox #AppointmentTimeStr', 'Выберите Время', selectedId);
+    }
+
+    function loadRegions(cityId, selectedId) {
+        ajaxLoadSelect('/api/region/getall/', cityId, '#appointmentFormBox #RegionID', 'Регион', selectedId);
+    }
+
+    function loadServiceClinics(clinicId, selectedId) {
+        ajaxLoadSelect('/api/serviceclinic/getAll/', clinicId, '#appointmentFormBox #ServiceClinicID', 'Услуга', selectedId);
+    }
+
+    function loadClinicDoctors(serviceClinicId, selectedId) {
+        ajaxLoadSelect('/api/clinicdoctor/get-all-key-value/', serviceClinicId, '#appointmentFormBox #ClinicDoctorID', 'Врач', selectedId);
+    }
+</script>

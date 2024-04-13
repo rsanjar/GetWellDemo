@@ -1,0 +1,77 @@
+﻿@model PaginatedList<Doctor>
+
+@{
+    string hideForClinic = User.IsInRole(UserRoles.Clinic) ? "hidden" : "";
+}
+
+<table class="table table-bordered table-striped table-hover dataTable">
+    <thead>
+        <tr>
+            <th @hideForClinic class="sorting" sort-id="@nameof(Doctor.ClinicName)">Клиника</th>
+            <th class="sorting" sort-id="@nameof(Doctor.FirstName)">Имя</th>
+            <th class="sorting" sort-id="@nameof(Doctor.LastName)">Фамилия</th>
+            <th class="sorting" sort-id="@nameof(Doctor.MiddleName)">Отчество</th>
+            <th class="sorting" sort-id="@nameof(Doctor.DateOfBirth)">Дата Рождения</th>
+            <th class="sorting" sort-id="@nameof(Doctor.IsActive)">Действующий</th>
+            <th class="sorting" sort-id="@nameof(Doctor.IsFamilyDoctor)">Семейный Врач</th>
+            <th class="sorting" sort-id="@nameof(Doctor.DateCreated)">Дата Регистрации</th>
+            <th>Изменить</th>
+            <th>Услуги</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td @hideForClinic>@(!string.IsNullOrWhiteSpace(i.ClinicName) ? i.ClinicName : "n/a")</td>
+                <td><span class="list-name">@i.FirstName</span></td>
+                <td><span class="list-name">@i.LastName</span></td>
+                <td><span class="list-name">@i.MiddleName</span></td>
+                <td>@i.DateOfBirth.ToString("dd-MMM-yyyy")</td>
+                <td>@(i.IsActive.GetValueOrDefault(false) ? "Да" : "Нет")</td>
+                <td>@(i.IsFamilyDoctor ? "Да" : "Нет")</td>
+                <td>@i.DateCreated.ToString("dd-MMM-yyyy HH:mm")</td>
+                <td class="text-center">
+                    <a asp-action="Edit" asp-controller="Doctor" asp-route-id="@i.ID" asp-route-clinicID="@i.ClinicID" title="@($"Профиль Врача - {i.FirstName} {i.LastName}")">
+                        <i class="material-icons">edit</i>
+                    </a>
+                </td>
+                <td class="text-center">
+                    @if (i.ClinicID > 0)
+                    {
+                        string title = $"Услуги Врача - {i.FirstName} {i.LastName}";
+
+                        if (User.IsInRole(UserRoles.Clinic))
+                        {
+                            <a asp-action="DoctorServices" asp-controller="ServiceClinicDoctor" asp-route-doctorId="@i.ID" title="@title">
+                                <span class="material-symbols-outlined">
+                                    medical_information
+                                </span>
+                            </a>
+                        }
+                        else if (User.IsInRole(UserRoles.Admin))
+                        {
+                            <a asp-action="Index" asp-controller="ServiceClinicDoctor" asp-route-doctorId="@i.ID" asp-route-clinicID="@i.ClinicID" title="@title">
+                                <span class="material-symbols-outlined">
+                                    medical_information
+                                </span>
+                            </a>
+                        }
+                        else if (User.IsInRole(UserRoles.Doctor))
+                        {
+                            <a asp-action="MyServices" asp-controller="ServiceClinicDoctor" title="@title">
+                                <span class="material-symbols-outlined">
+                                    medical_information
+                                </span>
+                            </a>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation">
+    @await Html.PartialAsync("Pagination", Model)
+</nav>

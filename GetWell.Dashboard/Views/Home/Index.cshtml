@@ -1,0 +1,70 @@
+﻿@{
+	ViewData["Title"] = "Dashboard";
+}
+
+@{ await Html.RenderPartialAsync("PageHeader"); }
+
+<div class="container-fluid">
+	<div class="row clearfix">
+		<div class="col-lg-4 col-md-6">
+			@{ await Html.RenderPartialAsync("StatBox"); }
+		</div>
+		<div class="col-lg-4 col-md-6">
+			@{ await Html.RenderPartialAsync("StatBox"); }
+		</div>
+		<div class="col-lg-4 col-md-6">
+			@{ await Html.RenderPartialAsync("StatBox"); }
+		</div>
+	</div>
+	<div class="row clearfix">
+		<div class="col-lg-8 col-md-12">
+			@{ await Html.RenderPartialAsync("Cards/HospitalSurvey"); }
+		</div>
+		<div class="col-lg-4 col-md-12">
+			@{ await Html.RenderPartialAsync("Cards/NewPatients"); }
+		</div>
+	</div>
+	<div class="row clearfix">
+		<div class="col-lg-4 col-md-12">
+			@{ await Html.RenderPartialAsync("Cards/Timeline"); }
+		</div>
+		<div class="col-lg-8 col-md-12">
+			<div class="row clearfix">
+				<div class="col-lg-4 col-md-6">
+					@{ await Html.RenderPartialAsync("Cards/TopCounter"); }
+				</div>
+				<div class="col-lg-4 col-md-6">
+					@{ await Html.RenderPartialAsync("Cards/TopCounter"); }
+				</div>
+				<div class="col-lg-4 col-md-6">
+					@{ await Html.RenderPartialAsync("Cards/TopCounter"); }
+				</div>
+			</div>
+			@{ await Html.RenderPartialAsync("Cards/VisitorMap"); }
+		</div>
+	</div>
+	<div class="row clearfix">
+		<div class="col-lg-4 col-md-12">
+			@{ await Html.RenderPartialAsync("Cards/MedicalTreatment"); }
+		</div>
+		<div class="col-lg-4 col-md-12">
+			@{ await Html.RenderPartialAsync("Cards/MedicalTreatment"); }
+		</div>
+		<div class="col-lg-4 col-md-12">
+			@{ await Html.RenderPartialAsync("Cards/MedicalTreatment"); }
+		</div>
+	</div>
+	<div class="row clearfix">
+		<div class="col-lg-4 col-md-12">
+			@{ await Html.RenderPartialAsync("Cards/TotalRevenue"); }
+		</div>
+		<div class="col-lg-8 col-md-12">
+			@{ await Html.RenderPartialAsync("Cards/NewPatientList"); }
+		</div>
+	</div>
+</div>
+
+@section Scripts
+{
+	<script src="/admin/assets/js/pages/index.min.js"></script>
+}

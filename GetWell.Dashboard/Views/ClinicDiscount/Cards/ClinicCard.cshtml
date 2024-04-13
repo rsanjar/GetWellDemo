@@ -1,0 +1,50 @@
+﻿@model ClinicDiscount
+
+<div class="row clearfix">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    <strong>Данные</strong> Клиники
+                    <small>Выберите Клинику...</small>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="ClinicCityID"></label>
+                            <select asp-for="ClinicCityID" class="form-control custom-select">
+                                <option>Город</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="ClinicCityRegionID"></label>
+                            <select asp-for="ClinicCityRegionID" disabled="disabled" class="form-control custom-select">
+                                <option>Регион</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="ClinicID">Клиника</label>
+                            <select asp-for="ClinicID" disabled="disabled" class="form-control custom-select">
+                                <option>Клиника</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="ServiceClinicID">Услуга</label>
+                            <select asp-for="ServiceClinicID" disabled="disabled" class="form-control custom-select">
+                                <option>Услуга</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

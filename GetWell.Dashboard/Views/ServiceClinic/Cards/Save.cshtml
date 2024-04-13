@@ -1,0 +1,39 @@
+﻿@model ServiceClinicModel
+
+@{
+    Layout = null;
+}
+
+<div class="card">
+    <div class="header">
+        <h2><strong>@Model.CategoryName</strong></h2>
+    </div>
+    <div class="body">
+        <form data-ajax-url="@Url.Action("Save", "ServiceClinic")"
+              data-ajax-failure="failure" data-ajax-loading="#fountainG"
+              data-ajax-method="post" data-ajax="true" data-ajax-mode="replace"
+              data-ajax-update="#ajaxContent_@Model.CategoryID" data-ajax-success="success">
+            <table class="table">
+                <tbody id="ajaxContent_@Model.CategoryID">
+                    @(await Html.PartialAsync("Cards/SaveFormData", Model))
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">
+                            <div class="row clearfix">
+                                <div class="col-sm-12 text-center">
+                                    <div class="form-group m-t-30 m-b-0">
+                                        <button type="submit" class="btn btn-primary btn-wd btn-round" title="Сохранить услуги для категории - @Model.CategoryName">Сохранить</button>
+                                        <button type="reset" class="btn btn-default btn-round btn-wd btn-simple">Сбросить</button>
+                                        <input type="hidden" asp-for="CategoryID" />
+                                        <input type="hidden" asp-for="ClinicID" />
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+    </div>
+</div>

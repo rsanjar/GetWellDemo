@@ -1,0 +1,131 @@
+﻿@model AppointmentSearch
+
+<div class="card">
+    <div class="header">
+        <h2><strong>Поиск</strong> Брони</h2>
+    </div>
+    <div class="body">
+        <form data-ajax-url="@Url.Action("SearchResult", "Appointment")"
+              data-ajax-begin="begin" data-ajax-loading="#fountainG"
+              data-ajax-method="post" data-ajax="true" data-ajax-mode="replace"
+              data-ajax-update="#searchResult" data-ajax-complete="complete">
+              
+            <div class="row clearfix">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="IsDoctorConfirmed" class="text-danger"></label>
+                                <select asp-for="IsDoctorConfirmed" class="form-control custom-select">
+                                    <option value="">Любой</option>
+                                    <option value="true">Да</option>
+                                    <option value="false">Нет</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="IsCanceled"></label>
+                                <select asp-for="IsCanceled" class="form-control custom-select">
+                                    <option value="">Любой</option>
+                                    <option value="true">Да</option>
+                                    <option value="false">Нет</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="IsActive"></label>
+                                <select asp-for="IsActive" class="form-control custom-select">
+                                    <option value="">Любой</option>
+                                    <option value="true">Да</option>
+                                    <option value="false">Нет</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        @if (User.IsInRole(UserRoles.Admin))
+                        {
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="CityID"></label>
+                                    <select asp-for="CityID" asp-items="Model.Cities" class="form-control custom-select"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="RegionID"></label>
+                                    <select asp-for="RegionID" disabled="disabled" class="form-control custom-select">
+                                        <option>Регион</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="ClinicName"></label>
+                                    <input asp-for="ClinicName" type="text" class="form-control" />
+                                    <input asp-for="ClinicID" type="hidden" />
+                                </div>
+                            </div>
+                        }
+                        <div class="col-sm-12">
+                            <div class="form-group input-group sup-title">
+                                <span class="input-group-addon">
+                                    <i class="zmdi zmdi-calendar"></i>
+                                </span>
+                                <label asp-for="AppointmentDateStart"></label>
+                                <input asp-for="AppointmentDateStart" type="text" class="datetimepicker form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group input-group sup-title">
+                                <span class="input-group-addon">
+                                    <i class="zmdi zmdi-calendar"></i>
+                                </span>
+                                <label asp-for="AppointmentDateEnd"></label>
+                                <input asp-for="AppointmentDateEnd" type="text" class="datetimepicker form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <input asp-for="ClinicDoctorID" type="hidden" />
+
+            @{ await Html.RenderPartialAsync("SearchFormSubmitSection", Model); }
+        </form>
+    </div>
+</div>
+
+<script src="~/assets/plugins/dropzone/dropzone.js"></script> <!-- Dropzone Plugin Js -->
+
+<script type="text/javascript" defer>
+    $(function () {
+        //Datetimepicker plugin
+        $('.datetimepicker').bootstrapMaterialDatePicker({
+            format: 'DD-MMM-YYYY',
+            clearButton: true,
+            weekStart: 1,
+            date: true,
+            time: false
+            //maxDate: Date.now
+        });
+
+        $('form #CityID').on('change', function () {
+            ajaxLoadSelect('/api/region/getall/', this.value, 'form #RegionID', 'Регион');
+            
+            $('#ClinicID').val(0);
+            $('#ClinicName').val('');
+        });
+
+        ajaxAutocompleteClinic();
+
+        $('form #RegionID').on('change', function () {
+            $('#ClinicID').val(0);
+            $('#ClinicName').val('');
+        });
+    });
+</script>

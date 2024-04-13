@@ -1,0 +1,251 @@
+﻿@model Clinic
+
+<div class="row clearfix">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    <strong>Базовая</strong> Информация
+                    <small>Основные данные клиники...</small>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row">
+                    @if (Model != null && !string.IsNullOrWhiteSpace(Model.ThumbnailUrl))
+                    {
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <img src="@(Model.ThumbnailUrl)?c=@Guid.NewGuid()" class="img img-thumbnail img-max-width-200" alt="" />
+                            </div>
+                        </div>
+                    }
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="ThumbnailImage"></label>
+                            <input type="file" asp-for="ThumbnailImage" accept="image/*" class="form-control" />
+                            <input type="hidden" asp-for="ThumbnailUrl" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @if (Model != null && !string.IsNullOrWhiteSpace(Model.LogoUrl))
+                    {
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <img src="@(Model.LogoUrl)?c=@Guid.NewGuid()" class="img img-thumbnail" alt="" />
+                            </div>
+                        </div>
+                    }
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="LogoImage"></label>
+                            <input type="file" asp-for="LogoImage" accept="image/*" class="form-control" />
+                            <input type="hidden" asp-for="LogoUrl" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="CityID"></label>
+                            <select asp-for="CityID" asp-items="Model?.Cities" class="form-control custom-select"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="RegionID"></label>
+                            <select asp-for="RegionID" disabled="disabled" class="form-control custom-select">
+                                <option>Регион</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="NameEn"></label>
+                            <input asp-for="NameEn" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="NameUz"></label>
+                            <input asp-for="NameUz" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="District"></label>
+                            <input asp-for="District" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="DistrictEn"></label>
+                            <input asp-for="DistrictEn" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="DistrictUz"></label>
+                            <input asp-for="DistrictUz" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="Street"></label>
+                            <input asp-for="Street" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="StreetEn"></label>
+                            <input asp-for="StreetEn" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="StreetUz"></label>
+                            <input asp-for="StreetUz" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="Address"></label>
+                            <input asp-for="Address" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="AddressEn"></label>
+                            <input asp-for="AddressEn" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="AddressUz"></label>
+                            <input asp-for="AddressUz" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="NearBy"></label>
+                            <input asp-for="NearBy" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="NearByEn"></label>
+                            <input asp-for="NearByEn" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="NearByUz"></label>
+                            <input asp-for="NearByUz" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="NearestSubway"></label>
+                            <input asp-for="NearestSubway" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="NearestSubwayEn"></label>
+                            <input asp-for="NearestSubwayEn" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="NearestSubwayUz"></label>
+                            <input asp-for="NearestSubwayUz" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group m-t-30">
+                            <label asp-for="Description"></label>
+                            <textarea asp-for="Description" rows="5" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group m-t-30">
+                            <label asp-for="DescriptionEn"></label>
+                            <textarea asp-for="DescriptionEn" rows="5" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group m-t-30">
+                            <label asp-for="DescriptionUz"></label>
+                            <textarea asp-for="DescriptionUz" rows="5" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="Website"></label>
+                            <input asp-for="Website" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Lat"></label>
+                            <input asp-for="Lat" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Long"></label>
+                            <input asp-for="Long" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group m-t-10 m-b-10">
+                            <div class="checkbox">
+                                <input asp-for="Private" type="checkbox" class="form-control" />
+                                <label asp-for="Private"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group m-t-10 m-b-10">
+                            <div class="checkbox">
+                                <input asp-for="IsFeatured" type="checkbox" class="form-control" />
+                                <label asp-for="IsFeatured"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="SortOrder"></label>
+                            <input asp-for="SortOrder" type="number" class="form-control" />
+                        </div>
+                    </div>
+                   
+                    <input type="hidden" asp-for="Active" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

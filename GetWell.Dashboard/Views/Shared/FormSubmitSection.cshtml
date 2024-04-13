@@ -1,0 +1,41 @@
+﻿
+<div class="row clearfix">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="body">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <div class="form-group m-t-30">
+                            <button type="submit" class="btn btn-primary btn-wd btn-round submit-button">Сохранить</button>
+                            <button type="reset" class="btn btn-default btn-round btn-wd btn-simple">Сбросить</button>
+                        </div>
+                        <div id="SaveFormMessageID" class="text-hide"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    begin = function() {
+        $('form button.submit-button').prop('disabled', true);
+    }
+
+    complete = function(msg) {
+        if (msg.status === 200)
+        {
+            showNotification('bg-green', 'Данные успешно сохранены!');
+            setTimeout(function(){
+                $('form').trigger('reset');
+                location.reload();
+            }, 500);
+        }
+        else
+            showNotification('bg-red', 'Произошла ошибка!');
+            
+        setTimeout(function(){
+            $('form button.submit-button').prop('disabled', false);            
+        }, 1500);  
+    }
+</script>
